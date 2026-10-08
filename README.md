@@ -60,18 +60,6 @@
   <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=draj256&theme=tokyonight" width="100%" alt="Profile Details" />
 </p>
 
-<!-- Stats Card & Commits by Hour -->
-<p align="center">
-  <img src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=draj256&theme=tokyonight" width="49%" alt="GitHub Stats" />
-  <img src="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=draj256&theme=tokyonight&utcOffset=5.5" width="49%" alt="Productive Time" />
-</p>
-
-<!-- Top Languages Cards -->
-<p align="center">
-  <img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=draj256&theme=tokyonight" width="49%" alt="Top Languages by Repo" />
-  <img src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=draj256&theme=tokyonight" width="49%" alt="Top Languages by Commit" />
-</p>
-
 <!-- Streak Stats -->
 <p align="center">
   <img src="https://streak-stats.demolab.com/?user=draj256&theme=tokyonight" width="100%" alt="GitHub Streak" />
