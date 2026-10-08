@@ -20,23 +20,24 @@
 
 ### 👨‍💻 About Me
 
-<table>
+<table width="100%">
   <tr>
-    <td width="65%" valign="top">
+    <!-- Left Column: About Info -->
+    <td width="50%" valign="middle">
       <ul>
         <li>🏢 <b>Founder</b> at <a href="https://hoslift.com">Hoslift</a>.</li>
-        <li>🛠️ <b>Full-Stack Developer</b> passionate about modern web technologies & cloud architectures.</li>
-        <li>⚡ Creator of <b><a href="https://github.com/hoslift/ranu.js">Ranu.js</a></b> — building high-performance developer tooling.</li>
+        <li>🛠️ <b>Full-Stack Developer</b> passionate about modern web tech.</li>
+        <li>⚡ Creator of <b><a href="https://github.com/hoslift/ranu.js">Ranu.js</a></b> — high-performance tooling.</li>
         <li>🌍 Based in <b>Sri Lanka</b> 🇱🇰.</li>
         <li>📫 Let's connect: <b>darshana@hoslift.com</b></li>
       </ul>
     </td>
-    <td width="35%" align="center" valign="middle">
-      <img src="https://media.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif" width="220px" alt="Coding Animation" />
+    <!-- Right Column: Live GitHub Stats Card (No Rate Limits) -->
+    <td width="50%" align="center" valign="middle">
+      <img src="https://github-stats-extended.vercel.app/api?username=draj256&show_icons=true&theme=github_dark&hide_border=true" width="100%" alt="GitHub Stats" />
     </td>
   </tr>
 </table>
-
 ---
 
 ### 🛠️ Tech Stack & Skills
@@ -55,12 +56,15 @@
 
 ### 📊 GitHub Activity & Statistics
 
-<!-- Profile Details & Contribution Graph -->
-<p align="center">
-  <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=draj256&theme=tokyonight" width="100%" alt="Profile Details" />
-</p>
-
-<!-- Streak Stats -->
-<p align="center">
-  <img src="https://streak-stats.demolab.com/?user=draj256&theme=tokyonight" width="100%" alt="GitHub Streak" />
-</p>
+<table width="100%">
+  <tr>
+    <!-- Left Column: Profile Details & Contribution Graph (GitHub Dark & Green) -->
+    <td width="50%" align="center" valign="middle">
+      <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=draj256&theme=github_dark" width="100%" alt="Profile Details" />
+    </td>
+    <!-- Right Column: Streak Stats (Black & Green) -->
+    <td width="50%" align="center" valign="middle">
+      <img src="https://streak-stats.demolab.com/?user=draj256&background=0d1117&border=0d1117&stroke=40c463&ring=40c463&fire=40c463&currStreakLabel=40c463&sideNums=ffffff&currStreakNum=ffffff&sideLabels=ffffff&dates=8b949e" width="100%" alt="GitHub Streak" />
+    </td>
+  </tr>
+</table>
