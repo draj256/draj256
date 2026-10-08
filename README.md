@@ -85,23 +85,5 @@
 
 ---
 
-### 🏆 GitHub Achievements
 
-<p align="center">
-  <a href="https://github.com/draj256?tab=achievements">
-    <img src="https://raw.githubusercontent.com/Schweinepriester/github-profile-achievements/main/images/yolo-default.png" width="85px" alt="YOLO" title="YOLO" />
-  </a>
-  <a href="https://github.com/draj256?tab=achievements">
-    <img src="https://raw.githubusercontent.com/Schweinepriester/github-profile-achievements/main/images/quickdraw-default.png" width="85px" alt="Quickdraw" title="Quickdraw" />
-  </a>
-  <a href="https://github.com/draj256?tab=achievements">
-    <img src="https://raw.githubusercontent.com/Schweinepriester/github-profile-achievements/main/images/pull-shark-default.png" width="85px" alt="Pull Shark" title="Pull Shark" />
-  </a>
-  <a href="https://github.com/draj256?tab=achievements">
-    <img src="https://raw.githubusercontent.com/Schweinepriester/github-profile-achievements/main/images/pair-extraordinaire-default.png" width="85px" alt="Pair Extraordinaire" title="Pair Extraordinaire" />
-  </a>
-  <a href="https://github.com/draj256?tab=achievements">
-    <img src="https://raw.githubusercontent.com/Schweinepriester/github-profile-achievements/main/images/galaxy-brain-default.png" width="85px" alt="Galaxy Brain" title="Galaxy Brain" />
-  </a>
-</p>
 <!-- GitHub Profile by draj256 -->
