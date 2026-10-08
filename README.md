@@ -55,18 +55,24 @@
 
 ### 📊 GitHub Activity & Statistics
 
-<!-- Contribution Graph -->
+<!-- Profile Details & Contribution Graph -->
 <p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=draj256&theme=tokyo-night&hide_border=true&area=true" width="100%" alt="Activity Graph" />
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=draj256&theme=tokyonight" width="100%" alt="Profile Details" />
 </p>
 
-<!-- Stats Cards & Languages -->
+<!-- Stats Card & Commits by Hour -->
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=draj256&show_icons=true&theme=tokyo-night&hide_border=true&count_private=true" width="48%" alt="GitHub Stats" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=draj256&layout=donut&theme=tokyo-night&hide_border=true" width="48%" alt="Top Languages" />
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=draj256&theme=tokyonight" width="49%" alt="GitHub Stats" />
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=draj256&theme=tokyonight&utcOffset=5.5" width="49%" alt="Productive Time" />
 </p>
 
-<!-- GitHub Trophies -->
+<!-- Top Languages Cards -->
 <p align="center">
-  <img src="https://github-profile-trophy.vercel.app/?username=draj256&theme=tokyonight&no-frame=false&no-bg=true&margin-w=4" width="100%" alt="GitHub Trophies" />
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=draj256&theme=tokyonight" width="49%" alt="Top Languages by Repo" />
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=draj256&theme=tokyonight" width="49%" alt="Top Languages by Commit" />
+</p>
+
+<!-- Streak Stats -->
+<p align="center">
+  <img src="https://streak-stats.demolab.com/?user=draj256&theme=tokyonight" width="100%" alt="GitHub Streak" />
 </p>
