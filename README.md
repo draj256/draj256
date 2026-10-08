@@ -108,7 +108,7 @@ If you're interested in TypeScript, web frameworks, developer tooling, or open s
 [hoslift.com](https://hoslift.com)
 
 **Ranu.js**  
-[ranu.js.org](https://ranu.js.org)
+[ranu.js.org](https://github.com/hoslift/ranu.js)
 
 **GitHub**  
 [@draj256](https://github.com/draj256)
