@@ -3,15 +3,16 @@
 # 👋 Hey Everyone, I'm Darshana Rajapaksha
 ### 🚀 Founder of Hoslift | Full-Stack Developer | Creator of Ranu.js
 
+<!-- Visitor Views (Green) -->
 <p align="center">
-  <img src="https://komarev.com/ghpvc/?username=draj256&label=Profile%20Views&color=0e75b6&style=flat-square" alt="Profile Views" />
+  <img src="https://komarev.com/ghpvc/?username=draj256&label=Profile%20Views&color=2ea043&style=flat-square" alt="Profile Views" />
 </p>
 
-<!-- Social Links -->
+<!-- Social Links (Unified GitHub Green Theme) -->
 <p align="center">
-  <a href="https://hoslift.com" target="_blank"><img src="https://img.shields.io/badge/Website-hoslift.com-0052CC?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Website" /></a>
-  <a href="mailto:darshana@hoslift.com"><img src="https://img.shields.io/badge/Email-darshana%40hoslift.com-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" /></a>
-  <a href="https://github.com/hoslift/ranu.js" target="_blank"><img src="https://img.shields.io/badge/Project-Ranu.js-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="Ranu.js" /></a>
+  <a href="https://hoslift.com" target="_blank"><img src="https://img.shields.io/badge/Website-hoslift.com-238636?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Website" /></a>
+  <a href="mailto:darshana@hoslift.com"><img src="https://img.shields.io/badge/Email-darshana%40hoslift.com-238636?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" /></a>
+  <a href="https://github.com/hoslift/ranu.js" target="_blank"><img src="https://img.shields.io/badge/Project-Ranu.js-238636?style=for-the-badge&logo=javascript&logoColor=white" alt="Ranu.js" /></a>
 </p>
 
 </div>
@@ -32,12 +33,17 @@
         <li>📫 Let's connect: <b>darshana@hoslift.com</b></li>
       </ul>
     </td>
-    <!-- Right Column: Live GitHub Stats Card (No Rate Limits) -->
+    <!-- Right Column: Live GitHub Stats Card (Green Primary Accent) -->
     <td width="50%" align="center" valign="middle">
-      <img src="https://github-stats-extended.vercel.app/api?username=draj256&show_icons=true&theme=github_dark&hide_border=true" width="100%" alt="GitHub Stats" />
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://github-stats-extended.vercel.app/api?username=draj256&show_icons=true&hide_border=true&title_color=40c463&icon_color=40c463&text_color=ffffff&bg_color=0d1117">
+        <source media="(prefers-color-scheme: light)" srcset="https://github-stats-extended.vercel.app/api?username=draj256&show_icons=true&hide_border=true&title_color=238636&icon_color=238636&text_color=24292e&bg_color=ffffff">
+        <img src="https://github-stats-extended.vercel.app/api?username=draj256&show_icons=true&hide_border=true&title_color=40c463&icon_color=40c463&text_color=ffffff&bg_color=0d1117" width="100%" alt="GitHub Stats" />
+      </picture>
     </td>
   </tr>
 </table>
+
 ---
 
 ### 🛠️ Tech Stack & Skills
@@ -58,13 +64,21 @@
 
 <table width="100%">
   <tr>
-    <!-- Left Column: Profile Details & Contribution Graph (GitHub Dark & Green) -->
+    <!-- Left Column: Profile Details & Activity Graph (Green Accent) -->
     <td width="50%" align="center" valign="middle">
-      <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=draj256&theme=github_dark" width="100%" alt="Profile Details" />
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=draj256&theme=github_dark">
+        <source media="(prefers-color-scheme: light)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=draj256&theme=github">
+        <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=draj256&theme=github_dark" width="100%" alt="Profile Details" />
+      </picture>
     </td>
-    <!-- Right Column: Streak Stats (Black & Green) -->
+    <!-- Right Column: Streak Stats (Green Accent) -->
     <td width="50%" align="center" valign="middle">
-      <img src="https://streak-stats.demolab.com/?user=draj256&background=0d1117&border=0d1117&stroke=40c463&ring=40c463&fire=40c463&currStreakLabel=40c463&sideNums=ffffff&currStreakNum=ffffff&sideLabels=ffffff&dates=8b949e" width="100%" alt="GitHub Streak" />
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com/?user=draj256&background=0d1117&border=0d1117&stroke=40c463&ring=40c463&fire=40c463&currStreakLabel=40c463&sideNums=ffffff&currStreakNum=ffffff&sideLabels=ffffff&dates=8b949e">
+        <source media="(prefers-color-scheme: light)" srcset="https://streak-stats.demolab.com/?user=draj256&background=ffffff&border=e1e4e8&stroke=238636&ring=238636&fire=238636&currStreakLabel=238636&sideNums=24292e&currStreakNum=24292e&sideLabels=24292e&dates=586069">
+        <img src="https://streak-stats.demolab.com/?user=draj256&background=0d1117&border=0d1117&stroke=40c463&ring=40c463&fire=40c463&currStreakLabel=40c463&sideNums=ffffff&currStreakNum=ffffff&sideLabels=ffffff&dates=8b949e" width="100%" alt="GitHub Streak" />
+      </picture>
     </td>
   </tr>
 </table>
