@@ -1,0 +1,130 @@
+<svg width="495" height="195" viewBox="0 0 495 195" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .bg { fill: #0d1117; stroke: #30363d; }
+    .header { font: 600 16px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #40c463; }
+    .trophy-bg { fill: #161b22; stroke: #30363d; stroke-width: 1; }
+    .trophy-title { font: 600 11px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #ffffff; }
+    .trophy-desc { font: 400 11px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #8b949e; }
+
+    @media (prefers-color-scheme: light) {
+      .bg { fill: #ffffff; stroke: #e1e4e8; }
+      .header { fill: #238636; }
+      .trophy-bg { fill: #f6f8fa; stroke: #d0d7de; }
+      .trophy-title { fill: #24292e; }
+      .trophy-desc { fill: #586069; }
+    }
+  </style>
+
+  <rect class="bg" x="0.5" y="0.5" width="494" height="194" rx="4.5" stroke-width="1"/>
+  <text x="25" y="34" class="header">🏆 GitHub Achievements &amp; Trophies</text>
+
+  
+    <g transform="translate(25, 52)">
+      <rect width="143" height="54" rx="6" class="trophy-bg"/>
+      
+      <!-- Trophy Cup Icon -->
+      <g transform="translate(8, 15)">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="#e3b341">
+          <path d="M19 5h-2V3a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v2H5a3 3 0 0 0-3 3v1a5 5 0 0 0 4.14 4.93A6 6 0 0 0 11 15.9V19H8a1 1 0 0 0 0 2h8a1 1 0 0 0 0-2h-3v-3.1a6 6 0 0 0 4.86-2A5 5 0 0 0 22 9V8a3 3 0 0 0-3-3zM5 9V8a1 1 0 0 1 1-1h1v3.86A3 3 0 0 1 5 9zm14 0a3 3 0 0 1-2 1.86V7h1a1 1 0 0 1 1 1z"/>
+        </svg>
+      </g>
+
+      <!-- Trophy Title & Value -->
+      <text x="36" y="21" class="trophy-title">Commits</text>
+      <text x="36" y="39" class="trophy-desc">2,441</text>
+
+      <!-- Rank Badge -->
+      <rect x="111" y="8" width="24" height="17" rx="3" fill="#e3b341" fill-opacity="0.15"/>
+      <text x="123" y="20" text-anchor="middle" font-weight="700" font-size="10.5px" fill="#e3b341">S</text>
+    </g>
+    <g transform="translate(176, 52)">
+      <rect width="143" height="54" rx="6" class="trophy-bg"/>
+      
+      <!-- Trophy Cup Icon -->
+      <g transform="translate(8, 15)">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="#e3b341">
+          <path d="M19 5h-2V3a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v2H5a3 3 0 0 0-3 3v1a5 5 0 0 0 4.14 4.93A6 6 0 0 0 11 15.9V19H8a1 1 0 0 0 0 2h8a1 1 0 0 0 0-2h-3v-3.1a6 6 0 0 0 4.86-2A5 5 0 0 0 22 9V8a3 3 0 0 0-3-3zM5 9V8a1 1 0 0 1 1-1h1v3.86A3 3 0 0 1 5 9zm14 0a3 3 0 0 1-2 1.86V7h1a1 1 0 0 1 1 1z"/>
+        </svg>
+      </g>
+
+      <!-- Trophy Title & Value -->
+      <text x="36" y="21" class="trophy-title">Pull Requests</text>
+      <text x="36" y="39" class="trophy-desc">141</text>
+
+      <!-- Rank Badge -->
+      <rect x="111" y="8" width="24" height="17" rx="3" fill="#e3b341" fill-opacity="0.15"/>
+      <text x="123" y="20" text-anchor="middle" font-weight="700" font-size="10.5px" fill="#e3b341">A+</text>
+    </g>
+    <g transform="translate(327, 52)">
+      <rect width="143" height="54" rx="6" class="trophy-bg"/>
+      
+      <!-- Trophy Cup Icon -->
+      <g transform="translate(8, 15)">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="#58a6ff">
+          <path d="M19 5h-2V3a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v2H5a3 3 0 0 0-3 3v1a5 5 0 0 0 4.14 4.93A6 6 0 0 0 11 15.9V19H8a1 1 0 0 0 0 2h8a1 1 0 0 0 0-2h-3v-3.1a6 6 0 0 0 4.86-2A5 5 0 0 0 22 9V8a3 3 0 0 0-3-3zM5 9V8a1 1 0 0 1 1-1h1v3.86A3 3 0 0 1 5 9zm14 0a3 3 0 0 1-2 1.86V7h1a1 1 0 0 1 1 1z"/>
+        </svg>
+      </g>
+
+      <!-- Trophy Title & Value -->
+      <text x="36" y="21" class="trophy-title">Repositories</text>
+      <text x="36" y="39" class="trophy-desc">3 Repos</text>
+
+      <!-- Rank Badge -->
+      <rect x="111" y="8" width="24" height="17" rx="3" fill="#58a6ff" fill-opacity="0.15"/>
+      <text x="123" y="20" text-anchor="middle" font-weight="700" font-size="10.5px" fill="#58a6ff">B</text>
+    </g>
+    <g transform="translate(25, 114)">
+      <rect width="143" height="54" rx="6" class="trophy-bg"/>
+      
+      <!-- Trophy Cup Icon -->
+      <g transform="translate(8, 15)">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="#e3b341">
+          <path d="M19 5h-2V3a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v2H5a3 3 0 0 0-3 3v1a5 5 0 0 0 4.14 4.93A6 6 0 0 0 11 15.9V19H8a1 1 0 0 0 0 2h8a1 1 0 0 0 0-2h-3v-3.1a6 6 0 0 0 4.86-2A5 5 0 0 0 22 9V8a3 3 0 0 0-3-3zM5 9V8a1 1 0 0 1 1-1h1v3.86A3 3 0 0 1 5 9zm14 0a3 3 0 0 1-2 1.86V7h1a1 1 0 0 1 1 1z"/>
+        </svg>
+      </g>
+
+      <!-- Trophy Title & Value -->
+      <text x="36" y="21" class="trophy-title">Experience</text>
+      <text x="36" y="39" class="trophy-desc">5 Years</text>
+
+      <!-- Rank Badge -->
+      <rect x="111" y="8" width="24" height="17" rx="3" fill="#e3b341" fill-opacity="0.15"/>
+      <text x="123" y="20" text-anchor="middle" font-weight="700" font-size="10.5px" fill="#e3b341">S</text>
+    </g>
+    <g transform="translate(176, 114)">
+      <rect width="143" height="54" rx="6" class="trophy-bg"/>
+      
+      <!-- Trophy Cup Icon -->
+      <g transform="translate(8, 15)">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="#e3b341">
+          <path d="M19 5h-2V3a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v2H5a3 3 0 0 0-3 3v1a5 5 0 0 0 4.14 4.93A6 6 0 0 0 11 15.9V19H8a1 1 0 0 0 0 2h8a1 1 0 0 0 0-2h-3v-3.1a6 6 0 0 0 4.86-2A5 5 0 0 0 22 9V8a3 3 0 0 0-3-3zM5 9V8a1 1 0 0 1 1-1h1v3.86A3 3 0 0 1 5 9zm14 0a3 3 0 0 1-2 1.86V7h1a1 1 0 0 1 1 1z"/>
+        </svg>
+      </g>
+
+      <!-- Trophy Title & Value -->
+      <text x="36" y="21" class="trophy-title">Issues</text>
+      <text x="36" y="39" class="trophy-desc">67</text>
+
+      <!-- Rank Badge -->
+      <rect x="111" y="8" width="24" height="17" rx="3" fill="#e3b341" fill-opacity="0.15"/>
+      <text x="123" y="20" text-anchor="middle" font-weight="700" font-size="10.5px" fill="#e3b341">A+</text>
+    </g>
+    <g transform="translate(327, 114)">
+      <rect width="143" height="54" rx="6" class="trophy-bg"/>
+      
+      <!-- Trophy Cup Icon -->
+      <g transform="translate(8, 15)">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="#58a6ff">
+          <path d="M19 5h-2V3a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v2H5a3 3 0 0 0-3 3v1a5 5 0 0 0 4.14 4.93A6 6 0 0 0 11 15.9V19H8a1 1 0 0 0 0 2h8a1 1 0 0 0 0-2h-3v-3.1a6 6 0 0 0 4.86-2A5 5 0 0 0 22 9V8a3 3 0 0 0-3-3zM5 9V8a1 1 0 0 1 1-1h1v3.86A3 3 0 0 1 5 9zm14 0a3 3 0 0 1-2 1.86V7h1a1 1 0 0 1 1 1z"/>
+        </svg>
+      </g>
+
+      <!-- Trophy Title & Value -->
+      <text x="36" y="21" class="trophy-title">Stars</text>
+      <text x="36" y="39" class="trophy-desc">4 Stars</text>
+
+      <!-- Rank Badge -->
+      <rect x="111" y="8" width="24" height="17" rx="3" fill="#58a6ff" fill-opacity="0.15"/>
+      <text x="123" y="20" text-anchor="middle" font-weight="700" font-size="10.5px" fill="#58a6ff">B</text>
+    </g>
+</svg>
