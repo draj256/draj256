@@ -53,13 +53,13 @@ I'm building Ranu.js with an emphasis on a cohesive developer experience, practi
     <!-- Left Column: GitHub Stats -->
     <td width="50%" align="center" valign="middle">
       <picture>
-       <img src="./top-langs.svg" width="100%" alt="Top Languages" />
+       <img src="./github-stats.svg" width="100%" alt="GitHub Stats" />
       </picture>
     </td>
     <!-- Right Column: GitHub Trophies -->
     <td width="50%" align="center" valign="middle">
       <picture>
-        <img src="./trophies.svg" width="100%" alt="GitHub Trophies" />
+        <img src="./github-streak.svg" width="100%" alt="GitHub Streak" />
       </picture>
     </td>
   </tr>
@@ -94,7 +94,7 @@ I'm building Ranu.js with an emphasis on a cohesive developer experience, practi
     <!-- Right Column: Streak Stats (Green Accent & Streak) -->
     <td width="50%" align="center" valign="middle">
       <picture>
-        <img src="./github-streak.svg" width="100%" alt="GitHub Streak" />
+       <img src="./recent-activity.svg" width="100%" alt="Recent Activity" />
       </picture>
     </td>
   </tr>
