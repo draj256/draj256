@@ -11,26 +11,30 @@
       100% { opacity: 1; }
     }
 
-    .bg { fill: #0d1117; stroke: #30363d; }
-    .divider { stroke: #30363d; }
+    .bg { fill: #0d1117; stroke: #0d1117; }
+    .divider { stroke: #40c463; stroke-width: 1; }
     .num-main { fill: #ffffff; }
     .label-main { fill: #ffffff; }
     .label-sub { fill: #8b949e; }
-    .accent { stroke: #ffffff; fill: #ffffff; }
+    .streak-ring { stroke: #40c463; fill: none; stroke-width: 5; }
+    .streak-fire { fill: #40c463; }
+    .streak-label { fill: #40c463; }
 
     @media (prefers-color-scheme: light) {
       .bg { fill: #ffffff; stroke: #e1e4e8; }
-      .divider { stroke: #e1e4e8; }
-      .num-main { fill: #000000; }
-      .label-main { fill: #000000; }
+      .divider { stroke: #238636; }
+      .num-main { fill: #24292e; }
+      .label-main { fill: #24292e; }
       .label-sub { fill: #586069; }
-      .accent { stroke: #000000; fill: #000000; }
+      .streak-ring { stroke: #238636; fill: none; }
+      .streak-fire { fill: #238636; }
+      .streak-label { fill: #238636; }
     }
   </style>
 
   <defs>
     <clipPath id="outer_rectangle">
-      <rect width="495" height="195" rx="10"/>
+      <rect width="495" height="195" rx="4.5"/>
     </clipPath>
     <mask id="mask_out_ring_behind_fire">
       <rect width="495" height="195" fill="white"/>
@@ -40,11 +44,11 @@
 
   <g clip-path="url(#outer_rectangle)">
     <!-- Card Background -->
-    <rect class="bg" stroke-width="1" rx="10" x="0.5" y="0.5" width="494" height="194"/>
+    <rect class="bg" rx="4.5" x="0.5" y="0.5" width="494" height="194"/>
 
-    <!-- Vertical Column Dividers -->
-    <line class="divider" x1="165" y1="28" x2="165" y2="170" stroke-width="1" stroke-linecap="round"/>
-    <line class="divider" x1="330" y1="28" x2="330" y2="170" stroke-width="1" stroke-linecap="round"/>
+    <!-- Vertical Column Dividers (Green) -->
+    <line class="divider" x1="165" y1="28" x2="165" y2="170" vector-effect="non-scaling-stroke"/>
+    <line class="divider" x1="330" y1="28" x2="330" y2="170" vector-effect="non-scaling-stroke"/>
 
     <!-- LEFT: Total Contributions -->
     <g transform="translate(82.5, 48)">
@@ -64,27 +68,27 @@
     </g>
 
     <!-- CENTER: Current Streak -->
-    <!-- Circular Ring -->
+    <!-- Circular Ring (Hollow Green with mask for fire icon) -->
     <g mask="url(#mask_out_ring_behind_fire)">
-      <circle cx="247.5" cy="71" r="40" fill="none" class="accent" stroke-width="5" style="opacity: 0; animation: fadein 0.5s linear forwards 0.4s"/>
+      <circle cx="247.5" cy="71" r="40" class="streak-ring" style="opacity: 0; animation: fadein 0.5s linear forwards 0.4s"/>
     </g>
 
-    <!-- Fire Icon -->
+    <!-- Fire Icon (Green) -->
     <g transform="translate(247.5, 19.5)" style="opacity: 0; animation: fadein 0.5s linear forwards 0.5s">
       <path d="M -12 -0.5 L 15 -0.5 L 15 23.5 L -12 23.5 L -12 -0.5 Z" fill="none"/>
-      <path class="accent" d="M 1.5 0.67 C 1.5 0.67 2.24 3.32 2.24 5.47 C 2.24 7.53 0.89 9.2 -1.17 9.2 C -3.23 9.2 -4.79 7.53 -4.79 5.47 L -4.76 5.11 C -6.78 7.51 -8 10.62 -8 13.99 C -8 18.41 -4.42 22 0 22 C 4.42 22 8 18.41 8 13.99 C 8 8.6 5.41 3.79 1.5 0.67 Z M -0.29 19 C -2.07 19 -3.51 17.6 -3.51 15.86 C -3.51 14.24 -2.46 13.1 -0.7 12.74 C 1.07 12.38 2.9 11.53 3.92 10.16 C 4.31 11.45 4.51 12.81 4.51 14.2 C 4.51 16.85 2.36 19 -0.29 19 Z"/>
+      <path class="streak-fire" d="M 1.5 0.67 C 1.5 0.67 2.24 3.32 2.24 5.47 C 2.24 7.53 0.89 9.2 -1.17 9.2 C -3.23 9.2 -4.79 7.53 -4.79 5.47 L -4.76 5.11 C -6.78 7.51 -8 10.62 -8 13.99 C -8 18.41 -4.42 22 0 22 C 4.42 22 8 18.41 8 13.99 C 8 8.6 5.41 3.79 1.5 0.67 Z M -0.29 19 C -2.07 19 -3.51 17.6 -3.51 15.86 C -3.51 14.24 -2.46 13.1 -0.7 12.74 C 1.07 12.38 2.9 11.53 3.92 10.16 C 4.31 11.45 4.51 12.81 4.51 14.2 C 4.51 16.85 2.36 19 -0.29 19 Z"/>
     </g>
 
-    <!-- Current Streak Big Number -->
+    <!-- Current Streak Big Number (White, visible inside ring) -->
     <g transform="translate(247.5, 48)">
       <text x="0" y="32" text-anchor="middle" class="num-main" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif" font-weight="700" font-size="28px" style="animation: currstreak 0.6s linear forwards">
         12
       </text>
     </g>
 
-    <!-- Current Streak Labels -->
+    <!-- Current Streak Labels (Green Title) -->
     <g transform="translate(247.5, 108)">
-      <text x="0" y="32" text-anchor="middle" class="label-main" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif" font-weight="700" font-size="14px" style="opacity: 0; animation: fadein 0.5s linear forwards 0.7s">
+      <text x="0" y="32" text-anchor="middle" class="streak-label" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif" font-weight="700" font-size="14px" style="opacity: 0; animation: fadein 0.5s linear forwards 0.7s">
         Current Streak
       </text>
     </g>
