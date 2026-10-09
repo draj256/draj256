@@ -1,20 +1,19 @@
 <div align="center">
 
+
 # 👋 Hey Everyone, I'm Darshana Rajapaksha
 ### 🚀 Founder of Hoslift | Full-Stack Developer | Creator of Ranu.js
 
 <!-- Visitor Views (Green) -->
 <p align="center">
-  <img src="https://komarev.com/ghpvc/?username=draj256&label=Profile%20Views&color=2ea043&style=flat-square" alt="Profile Views" />
+  <img src="https://img.shields.io/badge/STATUS-ACTIVE%20DEVELOPER-8957e5?style=for-the-badge&logo=github&logoColor=white" alt="Status" />
 </p>
-
 <!-- Social Links (Unified GitHub Green Theme) -->
 <p align="center">
-  <a href="https://hoslift.com" target="_blank"><img src="https://img.shields.io/badge/Website-hoslift.com-238636?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Website" /></a>
-  <a href="mailto:darshana@hoslift.com"><img src="https://img.shields.io/badge/Email-darshana%40hoslift.com-238636?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" /></a>
-  <a href="https://github.com/hoslift/ranu.js" target="_blank"><img src="https://img.shields.io/badge/Project-Ranu.js-238636?style=for-the-badge&logo=javascript&logoColor=white" alt="Ranu.js" /></a>
+  <a href="https://hoslift.com" target="_blank"><img src="https://img.shields.io/badge/Website-hoslift.com-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Website" /></a>
+  <a href="mailto:darshana@hoslift.com"><img src="https://img.shields.io/badge/Email-darshana%40hoslift.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" /></a>
+  <a href="https://www.linkedin.com/in/YOUR_LINKEDIN_USERNAME" target="_blank"><img src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
 </p>
-
 </div>
 
 ---
@@ -45,7 +44,7 @@ A TypeScript-focused, full-stack framework project developed under Hoslift.
 
 I'm building Ranu.js with an emphasis on a cohesive developer experience, practical full-stack workflows, and a growing open-source ecosystem.
 
-[![Explore Ranu.js](https://img.shields.io/badge/Explore%20the%20project-2563EB?style=for-the-badge&logo=github&logoColor=white)](https://github.com/hoslift/ranu.js)
+[![Explore Ranu.js](https://img.shields.io/badge/Explore%20the%20project-33BBCA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/hoslift/ranu.js)
 
 
 <table width="100%">
