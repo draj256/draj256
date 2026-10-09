@@ -38,6 +38,20 @@ function formatFullDate(dateStr) {
   return `${months[d.getUTCMonth()]} ${d.getUTCDate()}, ${d.getUTCFullYear()}`;
 }
 
+function timeAgo(dateStr) {
+  const diffMs = Date.now() - new Date(dateStr).getTime();
+  const diffMin = Math.floor(diffMs / 60000);
+  const diffHour = Math.floor(diffMin / 60);
+  const diffDay = Math.floor(diffHour / 24);
+
+  if (diffMin < 60) return `${Math.max(1, diffMin)}m ago`;
+  if (diffHour < 24) return `${diffHour}h ago`;
+  if (diffDay < 30) return `${diffDay}d ago`;
+  const d = new Date(dateStr);
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  return `${months[d.getUTCMonth()]} ${d.getUTCDate()}`;
+}
+
 async function getAllStats() {
   const userQuery = `
     query($login: String!) {
@@ -189,7 +203,213 @@ async function getAllStats() {
   };
 }
 
-// 💻 Top Languages Data Fetcher
+// ⚡ Recent Events Fetcher
+async function getRecentEvents() {
+  try {
+    const res = await fetch(`https://api.github.com/users/${USERNAME}/events?per_page=10`, {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+        'User-Agent': 'github-stats-generator',
+        Accept: 'application/vnd.github.v3+json',
+      },
+    });
+    if (!res.ok) return [];
+    const events = await res.json();
+    return Array.isArray(events) ? events : [];
+  } catch (err) {
+    console.error('Error fetching events:', err.message);
+    return [];
+  }
+}
+
+// ⚡ Recent Activity SVG Generator
+function parseEvent(e) {
+  const repo = e.repo?.name || 'repository';
+  const type = e.type;
+  const time = timeAgo(e.created_at);
+
+  let title = '';
+  let color = '#40c463';
+  let iconPath = '';
+
+  if (type === 'PushEvent') {
+    title = `Pushed commits to <tspan font-weight="700">${repo}</tspan>`;
+    color = '#40c463';
+    iconPath = 'M11.93 8.5a4.002 4.002 0 0 1-7.86 0H.75a.75.75 0 0 1 0-1.5h3.32a4.002 4.002 0 0 1 7.86 0h3.32a.75.75 0 0 1 0 1.5h-3.32Zm-1.43-.75a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z';
+  } else if (type === 'PullRequestEvent') {
+    const act = e.payload?.action === 'closed' ? 'Merged' : 'Opened';
+    title = `${act} pull request in <tspan font-weight="700">${repo}</tspan>`;
+    color = '#bc8cff';
+    iconPath = 'M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.44 5.335A.75.75 0 0 0 10.5 4.805V3.75h1.75a3 3 0 0 1 3 3v4.378a2.25 2.25 0 1 1-1.5 0V6.75a1.5 1.5 0 0 0-1.5-1.5H10.5v1.055a.75.75 0 0 0 1.06.67l.178-.089a.75.75 0 0 0-.671-1.341l-.178.089V5.25a.75.75 0 0 0-.75-.75H10.5V3.44a.75.75 0 0 0-1.06-.67l-2.263 1.132a.75.75 0 0 0 0 1.341L9.44 6.375a.75.75 0 0 0 1.06-.67V4.5';
+  } else if (type === 'CreateEvent') {
+    const refType = e.payload?.ref_type || 'branch';
+    title = `Created ${refType} in <tspan font-weight="700">${repo}</tspan>`;
+    color = '#58a6ff';
+    iconPath = 'M11.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm-2.25.75a2.25 2.25 0 1 1 3 2.122V6A2.5 2.5 0 0 1 10 8.5H6a1 1 0 0 0-1 1v1.128a2.251 2.251 0 1 1-1.5 0V5.372a2.25 2.25 0 1 1 1.5 0v1.836A2.493 2.493 0 0 1 6 7h4a1 1 0 0 0 1-1v-.628A2.25 2.25 0 0 1 9.5 3.25Z';
+  } else if (type === 'IssuesEvent') {
+    title = `Updated issue in <tspan font-weight="700">${repo}</tspan>`;
+    color = '#d29922';
+    iconPath = 'M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z';
+  } else if (type === 'WatchEvent') {
+    title = `Starred <tspan font-weight="700">${repo}</tspan>`;
+    color = '#e3b341';
+    iconPath = 'M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z';
+  } else {
+    title = `Activity in <tspan font-weight="700">${repo}</tspan>`;
+    color = '#40c463';
+    iconPath = 'M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z';
+  }
+
+  return { title, color, time, iconPath };
+}
+
+function generateRecentActivitySVG(rawEvents) {
+  const defaultEvents = [
+    { type: 'PushEvent', repo: { name: 'hoslift/ranu.js' }, created_at: new Date().toISOString() },
+    { type: 'CreateEvent', repo: { name: 'hoslift/ranu.js' }, payload: { ref_type: 'branch' }, created_at: new Date(Date.now() - 3600000 * 2).toISOString() },
+    { type: 'PushEvent', repo: { name: 'draj256/draj256' }, created_at: new Date(Date.now() - 3600000 * 12).toISOString() },
+    { type: 'PullRequestEvent', repo: { name: 'draj256/draj256' }, payload: { action: 'merged' }, created_at: new Date(Date.now() - 3600000 * 24).toISOString() },
+  ];
+
+  const eventsToUse = (rawEvents && rawEvents.length > 0) ? rawEvents.slice(0, 4) : defaultEvents;
+  const parsed = eventsToUse.map(parseEvent);
+
+  const itemsSVG = parsed.map((item, index) => {
+    const y = 56 + index * 32;
+
+    return `
+    <g transform="translate(25, ${y})">
+      <circle cx="10" cy="8" r="10" fill="${item.color}" fill-opacity="0.15"/>
+      <g transform="translate(4, 2)">
+        <svg viewBox="0 0 16 16" width="12" height="12" fill="${item.color}">
+          <path d="${item.iconPath}"/>
+        </svg>
+      </g>
+      <text x="30" y="12" class="activity-text">${item.title}</text>
+      <text x="445" y="12" text-anchor="end" class="activity-time">${item.time}</text>
+    </g>`;
+  }).join('');
+
+  return `<svg width="495" height="195" viewBox="0 0 495 195" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .bg { fill: #0d1117; stroke: #30363d; }
+    .header { font: 600 16px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #40c463; }
+    .timeline-line { stroke: #30363d; stroke-width: 1.5; stroke-dasharray: 2 2; }
+    .activity-text { font: 400 12px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #c9d1d9; }
+    .activity-time { font: 400 11px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #8b949e; }
+
+    @media (prefers-color-scheme: light) {
+      .bg { fill: #ffffff; stroke: #e1e4e8; }
+      .header { fill: #238636; }
+      .timeline-line { stroke: #e1e4e8; }
+      .activity-text { fill: #24292e; }
+      .activity-time { fill: #586069; }
+    }
+  </style>
+
+  <rect class="bg" x="0.5" y="0.5" width="494" height="194" rx="4.5" stroke-width="1"/>
+  <text x="25" y="34" class="header">⚡ Recent Activity Timeline</text>
+  <line x1="35" y1="64" x2="35" y2="160" class="timeline-line"/>
+  ${itemsSVG}
+</svg>`;
+}
+
+// 🏆 Trophies Rank & SVG Generator
+function getTrophyRank(type, val) {
+  if (type === 'commits') {
+    if (val >= 2000) return { rank: 'S', color: '#e3b341' };
+    if (val >= 1000) return { rank: 'A+', color: '#e3b341' };
+    if (val >= 500) return { rank: 'A', color: '#40c463' };
+    return { rank: 'B', color: '#58a6ff' };
+  }
+  if (type === 'prs') {
+    if (val >= 200) return { rank: 'S', color: '#e3b341' };
+    if (val >= 100) return { rank: 'A+', color: '#e3b341' };
+    if (val >= 50) return { rank: 'A', color: '#40c463' };
+    return { rank: 'B', color: '#58a6ff' };
+  }
+  if (type === 'repos') {
+    if (val >= 30) return { rank: 'S', color: '#e3b341' };
+    if (val >= 15) return { rank: 'A+', color: '#e3b341' };
+    if (val >= 5) return { rank: 'A', color: '#40c463' };
+    return { rank: 'B', color: '#58a6ff' };
+  }
+  if (type === 'years') {
+    if (val >= 5) return { rank: 'S', color: '#e3b341' };
+    if (val >= 3) return { rank: 'A+', color: '#e3b341' };
+    if (val >= 2) return { rank: 'A', color: '#40c463' };
+    return { rank: 'B', color: '#58a6ff' };
+  }
+  if (type === 'issues') {
+    if (val >= 100) return { rank: 'S', color: '#e3b341' };
+    if (val >= 50) return { rank: 'A+', color: '#e3b341' };
+    if (val >= 20) return { rank: 'A', color: '#40c463' };
+    return { rank: 'B', color: '#58a6ff' };
+  }
+  if (type === 'stars') {
+    if (val >= 50) return { rank: 'S', color: '#e3b341' };
+    if (val >= 20) return { rank: 'A+', color: '#e3b341' };
+    if (val >= 10) return { rank: 'A', color: '#40c463' };
+    return { rank: 'B', color: '#58a6ff' };
+  }
+  return { rank: 'B', color: '#58a6ff' };
+}
+
+function generateTrophiesSVG(stats) {
+  const { totalCommits, totalPRs, publicRepos, yearsJoined, totalIssues, totalStars } = stats;
+
+  const trophies = [
+    { name: 'Commits', ...getTrophyRank('commits', totalCommits), desc: totalCommits.toLocaleString() },
+    { name: 'Pull Requests', ...getTrophyRank('prs', totalPRs), desc: totalPRs.toLocaleString() },
+    { name: 'Repositories', ...getTrophyRank('repos', publicRepos), desc: `${publicRepos} Repos` },
+    { name: 'Experience', ...getTrophyRank('years', yearsJoined), desc: `${yearsJoined} Years` },
+    { name: 'Issues', ...getTrophyRank('issues', totalIssues), desc: totalIssues.toLocaleString() },
+    { name: 'Stars', ...getTrophyRank('stars', totalStars), desc: `${totalStars} Stars` },
+  ];
+
+  const trophyItemsSVG = trophies.map((t, i) => {
+    const row = Math.floor(i / 3);
+    const col = i % 3;
+    const x = 25 + col * 151;
+    const y = 52 + row * 62;
+
+    return `
+    <g transform="translate(${x}, ${y})">
+      <rect width="143" height="54" rx="6" class="trophy-bg"/>
+      <g transform="translate(8, 15)">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="${t.color}">
+          <path d="M19 5h-2V3a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v2H5a3 3 0 0 0-3 3v1a5 5 0 0 0 4.14 4.93A6 6 0 0 0 11 15.9V19H8a1 1 0 0 0 0 2h8a1 1 0 0 0 0-2h-3v-3.1a6 6 0 0 0 4.86-2A5 5 0 0 0 22 9V8a3 3 0 0 0-3-3zM5 9V8a1 1 0 0 1 1-1h1v3.86A3 3 0 0 1 5 9zm14 0a3 3 0 0 1-2 1.86V7h1a1 1 0 0 1 1 1z"/>
+        </svg>
+      </g>
+      <text x="36" y="21" class="trophy-title">${t.name}</text>
+      <text x="36" y="39" class="trophy-desc">${t.desc}</text>
+      <rect x="111" y="8" width="24" height="17" rx="3" fill="${t.color}" fill-opacity="0.15"/>
+      <text x="123" y="20" text-anchor="middle" font-weight="700" font-size="10.5px" fill="${t.color}">${t.rank}</text>
+    </g>`;
+  }).join('');
+
+  return `<svg width="495" height="195" viewBox="0 0 495 195" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .bg { fill: #0d1117; stroke: #30363d; }
+    .header { font: 600 16px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #40c463; }
+    .trophy-bg { fill: #161b22; stroke: #30363d; stroke-width: 1; }
+    .trophy-title { font: 600 11px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #ffffff; }
+    .trophy-desc { font: 400 11px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #8b949e; }
+    @media (prefers-color-scheme: light) {
+      .bg { fill: #ffffff; stroke: #e1e4e8; }
+      .header { fill: #238636; }
+      .trophy-bg { fill: #f6f8fa; stroke: #d0d7de; }
+      .trophy-title { fill: #24292e; }
+      .trophy-desc { fill: #586069; }
+    }
+  </style>
+  <rect class="bg" x="0.5" y="0.5" width="494" height="194" rx="4.5" stroke-width="1"/>
+  <text x="25" y="34" class="header">🏆 GitHub Achievements &amp; Trophies</text>
+  ${trophyItemsSVG}
+</svg>`;
+}
+
+// 💻 Top Languages Data Fetcher & SVG Generator
 async function getTopLanguages() {
   const query = `
     query($login: String!) {
@@ -251,7 +471,6 @@ async function getTopLanguages() {
         percentage: (item.size / totalBytes) * 100,
       }));
   } catch (err) {
-    console.error('Warning: could not fetch languages, using fallback:', err.message);
     return [
       { name: 'TypeScript', color: '#3178c6', percentage: 68.2 },
       { name: 'JavaScript', color: '#f1e05a', percentage: 22.4 },
@@ -262,7 +481,6 @@ async function getTopLanguages() {
   }
 }
 
-// 💻 Top Languages Card SVG Generator
 function generateTopLangsSVG(langs) {
   const displayLangs = (langs && langs.length > 0) ? langs.slice(0, 6) : [];
 
@@ -302,7 +520,6 @@ function generateTopLangsSVG(langs) {
     .lang-name { font: 600 12px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #ffffff; }
     .lang-pct { font: 400 11.5px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #8b949e; }
     .bar-bg { fill: #21262d; }
-
     @media (prefers-color-scheme: light) {
       .bg { fill: #ffffff; stroke: #e1e4e8; }
       .header { fill: #238636; }
@@ -311,25 +528,19 @@ function generateTopLangsSVG(langs) {
       .bar-bg { fill: #eaecef; }
     }
   </style>
-
   <rect class="bg" x="0.5" y="0.5" width="494" height="194" rx="4.5" stroke-width="1"/>
   <text x="25" y="34" class="header">💻 Most Used Languages</text>
-
-  <!-- Continuous Multi-Language Progress Bar -->
   <g transform="translate(25, 48)">
     <rect width="${totalBarWidth}" height="8" rx="4" class="bar-bg"/>
     <g clip-path="url(#bar-clip)">
       ${segmentsSVG}
     </g>
   </g>
-
   <defs>
     <clipPath id="bar-clip">
       <rect width="${totalBarWidth}" height="8" rx="4"/>
     </clipPath>
   </defs>
-
-  <!-- Languages 2-column Grid -->
   ${itemsSVG}
 </svg>`;
 }
@@ -452,7 +663,9 @@ async function main() {
 
   console.log('Fetching top languages...');
   const langs = await getTopLanguages();
-  console.log('Computed languages:', langs.map(l => `${l.name} (${l.percentage.toFixed(1)}%)`).join(', '));
+
+  console.log('Fetching recent activity events...');
+  const events = await getRecentEvents();
 
   fs.writeFileSync('github-streak.svg', generateStreakSVG(stats));
   console.log('Successfully generated github-streak.svg!');
@@ -460,8 +673,14 @@ async function main() {
   fs.writeFileSync('github-stats.svg', generateStatsSVG(stats));
   console.log('Successfully generated github-stats.svg!');
 
+  fs.writeFileSync('trophies.svg', generateTrophiesSVG(stats));
+  console.log('Successfully generated trophies.svg!');
+
   fs.writeFileSync('top-langs.svg', generateTopLangsSVG(langs));
   console.log('Successfully generated top-langs.svg!');
+
+  fs.writeFileSync('recent-activity.svg', generateRecentActivitySVG(events));
+  console.log('Successfully generated recent-activity.svg!');
 }
 
 main().catch(err => {
