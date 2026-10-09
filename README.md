@@ -44,6 +44,27 @@
   </tr>
 </table>
 
+<table width="100%">
+  <tr>
+    <!-- Left Column: About Info -->
+    <td width="50%" valign="middle">
+      <ul>
+        <li>🏢 <b>Founder</b> at <a href="https://hoslift.com">Hoslift</a>.</li>
+        <li>🛠️ <b>Full-Stack Developer</b> passionate about modern web tech.</li>
+        <li>⚡ Creator of <b><a href="https://github.com/hoslift/ranu.js">Ranu.js</a></b> — high-performance tooling.</li>
+        <li>🌍 Based in <b>Sri Lanka</b> 🇱🇰.</li>
+        <li>📫 Let's connect: <b>darshana@hoslift.com</b></li>
+      </ul>
+    </td>
+    <!-- Right Column: Live GitHub Stats Card (Green Primary Accent) -->
+    <td width="50%" align="center" valign="middle">
+      <picture>
+       <img src="./github-stats.svg" alt="GitHub Stats" width="100%" />
+      </picture>
+    </td>
+  </tr>
+</table>
+
 ---
 
 ### 🛠️ Tech Stack & Skills
