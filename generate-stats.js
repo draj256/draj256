@@ -63,7 +63,6 @@ async function getAllStats() {
   const totalIssues = user.issues.totalCount;
   const totalContributedTo = user.repositoriesContributedTo.totalCount;
   const publicRepos = user.publicRepos ? user.publicRepos.totalCount : 1;
-  const userEmail = 'darshana@hoslift.com';
   const totalStars = user.repositories.nodes.reduce((acc, repo) => acc + repo.stargazerCount, 0);
 
   const startYear = new Date(user.createdAt).getFullYear();
@@ -121,20 +120,9 @@ async function getAllStats() {
   const todayStr = new Date().toISOString().slice(0, 10);
   const pastDays = sortedDays.filter(d => d.date <= todayStr);
 
-  const monthlyData = new Array(12).fill(0);
-  const now = new Date();
-  for (const d of pastDays) {
-    const dayDate = new Date(d.date);
-    const monthsDiff = (now.getFullYear() - dayDate.getFullYear()) * 12 + (now.getMonth() - dayDate.getMonth());
-    if (monthsDiff >= 0 && monthsDiff < 12) {
-      monthlyData[11 - monthsDiff] += d.count;
-    }
-  }
-
   let longestStreak = 0;
   let longestStart = '';
   let longestEnd = '';
-
   let tempStreak = 0;
   let tempStart = '';
 
@@ -156,7 +144,6 @@ async function getAllStats() {
   let currentStreak = 0;
   let currentStart = '';
   let currentEnd = '';
-
   const n = pastDays.length;
   let lastIdx = n - 1;
 
@@ -186,14 +173,12 @@ async function getAllStats() {
 
   return {
     displayName: user.name || USERNAME,
-    username: USERNAME,
-    userEmail,
-    publicRepos,
-    yearsJoined,
     totalCommits,
     totalPRs,
     totalIssues,
     totalStars,
+    publicRepos,
+    yearsJoined,
     totalContributedTo,
     totalContributions,
     totalRange,
@@ -201,117 +186,10 @@ async function getAllStats() {
     currRange,
     longestStreak,
     longestRange,
-    monthlyData,
   };
 }
 
-async function getCommitHabits() {
-  const res = await fetch(`https://api.github.com/search/commits?q=author:${USERNAME}&sort=author-date&order=desc&per_page=100`, {
-    headers: {
-      Authorization: `Bearer ${TOKEN}`,
-      Accept: 'application/vnd.github.cloak-preview',
-      'User-Agent': 'github-habits-analyzer',
-    },
-  });
-  const data = await res.json();
-  const dayCounts = { Mon: 0, Tue: 0, Wed: 0, Thu: 0, Fri: 0, Sat: 0, Sun: 0 };
-  const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  const fullDayNames = {
-    Sun: 'Sunday', Mon: 'Monday', Tue: 'Tuesday', Wed: 'Wednesday',
-    Thu: 'Thursday', Fri: 'Friday', Sat: 'Saturday'
-  };
-
-  let morning = 0;
-  let daytime = 0;
-  let evening = 0;
-  let night = 0;
-
-  if (data.items && data.items.length > 0) {
-    for (const item of data.items) {
-      if (!item.commit || !item.commit.author || !item.commit.author.date) continue;
-      const d = new Date(item.commit.author.date);
-      const h = d.getHours();
-      const dayName = dayNames[d.getDay()];
-      dayCounts[dayName] = (dayCounts[dayName] || 0) + 1;
-
-      if (h >= 6 && h < 12) morning++;
-      else if (h >= 12 && h < 18) daytime++;
-      else if (h >= 18 && h < 24) evening++;
-      else night++;
-    }
-  }
-
-  let peakDayKey = 'Fri';
-  let maxDayCount = -1;
-  for (const [day, count] of Object.entries(dayCounts)) {
-    if (count > maxDayCount) {
-      maxDayCount = count;
-      peakDayKey = day;
-    }
-  }
-
-  const timeBuckets = { Morning: morning, Daytime: daytime, Evening: evening, Night: night };
-  let peakTime = 'Daytime';
-  let maxTimeCount = -1;
-  for (const [bucket, count] of Object.entries(timeBuckets)) {
-    if (count > maxTimeCount) {
-      maxTimeCount = count;
-      peakTime = bucket;
-    }
-  }
-
-  return {
-    morning,
-    daytime,
-    evening,
-    night,
-    dayCounts,
-    peakDay: fullDayNames[peakDayKey] || 'Friday',
-    peakTime,
-  };
-}
-
-async function getLocStats() {
-  const query = `
-    query($login: String!) {
-      user(login: $login) {
-        pullRequests(first: 100) {
-          nodes {
-            additions
-            deletions
-          }
-        }
-        contributionsCollection {
-          totalCommitContributions
-          restrictedContributionsCount
-          totalPullRequestContributions
-          totalIssueContributions
-          totalPullRequestReviewContributions
-        }
-      }
-    }
-  `;
-  const data = await fetchGraphQL(query, { login: USERNAME });
-  const prs = data.user.pullRequests.nodes;
-  let totalAdd = 0;
-  let totalDel = 0;
-  prs.forEach(p => {
-    totalAdd += p.additions;
-    totalDel += p.deletions;
-  });
-
-  const coll = data.user.contributionsCollection;
-  return {
-    totalAdd,
-    totalDel,
-    commits: coll.totalCommitContributions + coll.restrictedContributionsCount,
-    prs: coll.totalPullRequestContributions,
-    issues: coll.totalIssueContributions,
-    reviews: coll.totalPullRequestReviewContributions,
-  };
-}
-
-// 1. Streak Stats SVG
+// Option 1: Streak Stats SVG
 function generateStreakSVG(stats) {
   const { totalContributions, totalRange, currentStreak, currRange, longestStreak, longestRange } = stats;
 
@@ -362,7 +240,7 @@ function generateStreakSVG(stats) {
 </svg>`;
 }
 
-// 2. Stats Card SVG
+// Option 2: Stats Card SVG
 function generateStatsSVG(stats) {
   const { displayName, totalCommits, totalPRs, totalIssues, totalStars, totalContributedTo } = stats;
 
@@ -422,281 +300,107 @@ function generateStatsSVG(stats) {
 </svg>`;
 }
 
-// 3. Profile Details SVG
-function generateProfileDetailsSVG(stats) {
-  const { displayName, username, userEmail, publicRepos, yearsJoined, totalContributions, monthlyData } = stats;
-
-  const chartX = 245;
-  const chartY = 38;
-  const chartW = 225;
-  const chartH = 105;
-
-  const maxVal = Math.max(...monthlyData, 10);
-  const pts = monthlyData.map((val, idx) => {
-    const x = chartX + (idx / (monthlyData.length - 1)) * chartW;
-    const y = chartY + chartH - (val / maxVal) * chartH;
-    return { x, y };
-  });
-
-  let pathD = `M ${pts[0].x} ${pts[0].y}`;
-  for (let i = 1; i < pts.length; i++) {
-    const prev = pts[i - 1];
-    const curr = pts[i];
-    const mx = (prev.x + curr.x) / 2;
-    pathD += ` C ${mx} ${prev.y}, ${mx} ${curr.y}, ${curr.x} ${curr.y}`;
+// Option 4: 🏆 GitHub Trophies Card SVG
+function getTrophyRank(type, val) {
+  if (type === 'commits') {
+    if (val >= 2000) return { rank: 'S', color: '#e3b341' };
+    if (val >= 1000) return { rank: 'A+', color: '#e3b341' };
+    if (val >= 500) return { rank: 'A', color: '#40c463' };
+    return { rank: 'B', color: '#58a6ff' };
   }
-  const areaD = `${pathD} L ${chartX + chartW} ${chartY + chartH} L ${chartX} ${chartY + chartH} Z`;
-
-  const contribText = totalContributions >= 1000 
-    ? `${(totalContributions / 1000).toFixed(2)}k Contributions on GitHub`
-    : `${totalContributions} Contributions on GitHub`;
-
-  return `<svg width="495" height="195" viewBox="0 0 495 195" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <style>
-    .bg { fill: #0d1117; stroke: #30363d; }
-    .header-name { font: 600 16px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #40c463; }
-    .sub-item { font: 400 11.5px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #8b949e; }
-    .icon { fill: #8b949e; }
-    .chart-label { font: 400 10px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #8b949e; }
-    .chart-line { stroke: #40c463; stroke-width: 2; fill: none; }
-    .chart-area { fill: #40c463; fill-opacity: 0.25; }
-    .axis { stroke: #30363d; stroke-width: 1; }
-
-    @media (prefers-color-scheme: light) {
-      .bg { fill: #ffffff; stroke: #e1e4e8; }
-      .header-name { fill: #238636; }
-      .sub-item { fill: #586069; }
-      .icon { fill: #586069; }
-      .chart-label { fill: #586069; }
-      .chart-line { stroke: #238636; }
-      .chart-area { fill: #238636; fill-opacity: 0.2; }
-      .axis { stroke: #e1e4e8; }
-    }
-  </style>
-
-  <rect class="bg" x="0.5" y="0.5" width="494" height="194" rx="4.5" stroke-width="1"/>
-
-  <text x="25" y="36" class="header-name">${username} (${displayName.slice(0, 15)}...)</text>
-
-  <g transform="translate(25, 54)">
-    <svg class="icon" viewBox="0 0 16 16" width="14" height="14">
-      <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-    </svg>
-    <text x="22" y="11" class="sub-item">${contribText}</text>
-  </g>
-
-  <g transform="translate(25, 82)">
-    <svg class="icon" viewBox="0 0 16 16" width="14" height="14">
-      <path fill-rule="evenodd" d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5v-9Zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 0 1 1-1h8ZM5 12.25v3.25a.25.25 0 0 0 .4.2l1.45-1.087a.25.25 0 0 1 .3 0L8.6 15.7a.25.25 0 0 0 .4-.2v-3.25a.25.25 0 0 0-.25-.25h-3.5a.25.25 0 0 0-.25.25Z"/>
-    </svg>
-    <text x="22" y="11" class="sub-item">${publicRepos} Public Repos</text>
-  </g>
-
-  <g transform="translate(25, 110)">
-    <svg class="icon" viewBox="0 0 16 16" width="14" height="14">
-      <path fill-rule="evenodd" d="M1.5 8a6.5 6.5 0 1 1 13 0 6.5 6.5 0 0 1-13 0ZM8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0Zm.5 4.75a.75.75 0 0 0-1.5 0v3.5a.75.75 0 0 0 .471.696l2.5 1a.75.75 0 0 0 .557-1.392L8.5 7.742V4.75Z"/>
-    </svg>
-    <text x="22" y="11" class="sub-item">Joined GitHub ${yearsJoined} years ago</text>
-  </g>
-
-  <g transform="translate(25, 138)">
-    <svg class="icon" viewBox="0 0 16 16" width="14" height="14">
-      <path fill-rule="evenodd" d="M1.75 2A1.75 1.75 0 0 0 0 3.75v.736a.75.75 0 0 0 0 .027v7.737C0 13.216.784 14 1.75 14h12.5A1.75 1.75 0 0 0 16 12.25v-8.5A1.75 1.75 0 0 0 14.25 2H1.75ZM14.5 4.07v-.32a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25v.32L8 7.88l6.5-3.81Zm-13 1.74v6.441c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V5.809L8.38 9.397a.75.75 0 0 1-.76 0L1.5 5.809Z"/>
-    </svg>
-    <text x="22" y="11" class="sub-item">${userEmail}</text>
-  </g>
-
-  <text x="${chartX + chartW}" y="25" text-anchor="end" class="chart-label">contributions in the last year</text>
-  <path class="chart-area" d="${areaD}"/>
-  <path class="chart-line" d="${pathD}"/>
-  <line class="axis" x1="${chartX}" y1="${chartY + chartH}" x2="${chartX + chartW}" y2="${chartY + chartH}"/>
-  <text x="${chartX}" y="${chartY + chartH + 18}" class="chart-label">Oct</text>
-  <text x="${chartX + chartW * 0.25}" y="${chartY + chartH + 18}" text-anchor="middle" class="chart-label">Jan</text>
-  <text x="${chartX + chartW * 0.5}" y="${chartY + chartH + 18}" text-anchor="middle" class="chart-label">Apr</text>
-  <text x="${chartX + chartW * 0.75}" y="${chartY + chartH + 18}" text-anchor="middle" class="chart-label">Jul</text>
-  <text x="${chartX + chartW}" y="${chartY + chartH + 18}" text-anchor="end" class="chart-label">Oct</text>
-</svg>`;
+  if (type === 'prs') {
+    if (val >= 200) return { rank: 'S', color: '#e3b341' };
+    if (val >= 100) return { rank: 'A+', color: '#e3b341' };
+    if (val >= 50) return { rank: 'A', color: '#40c463' };
+    return { rank: 'B', color: '#58a6ff' };
+  }
+  if (type === 'repos') {
+    if (val >= 30) return { rank: 'S', color: '#e3b341' };
+    if (val >= 15) return { rank: 'A+', color: '#e3b341' };
+    if (val >= 5) return { rank: 'A', color: '#40c463' };
+    return { rank: 'B', color: '#58a6ff' };
+  }
+  if (type === 'years') {
+    if (val >= 5) return { rank: 'S', color: '#e3b341' };
+    if (val >= 3) return { rank: 'A+', color: '#e3b341' };
+    if (val >= 2) return { rank: 'A', color: '#40c463' };
+    return { rank: 'B', color: '#58a6ff' };
+  }
+  if (type === 'issues') {
+    if (val >= 100) return { rank: 'S', color: '#e3b341' };
+    if (val >= 50) return { rank: 'A+', color: '#e3b341' };
+    if (val >= 20) return { rank: 'A', color: '#40c463' };
+    return { rank: 'B', color: '#58a6ff' };
+  }
+  if (type === 'stars') {
+    if (val >= 50) return { rank: 'S', color: '#e3b341' };
+    if (val >= 20) return { rank: 'A+', color: '#e3b341' };
+    if (val >= 10) return { rank: 'A', color: '#40c463' };
+    return { rank: 'B', color: '#58a6ff' };
+  }
+  return { rank: 'B', color: '#58a6ff' };
 }
 
-// 4. Productive Hours & Commit Habits SVG
-function generateHabitsSVG(habits) {
-  const { morning, daytime, evening, night, dayCounts, peakDay, peakTime } = habits;
-  const total = morning + daytime + evening + night || 1;
-  const mPct = Math.round((morning / total) * 100);
-  const dPct = Math.round((daytime / total) * 100);
-  const ePct = Math.round((evening / total) * 100);
-  const nPct = Math.round((night / total) * 100);
+function generateTrophiesSVG(stats) {
+  const { totalCommits, totalPRs, publicRepos, yearsJoined, totalIssues, totalStars } = stats;
 
-  const barMaxW = 100;
-  const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-  const maxDayVal = Math.max(...Object.values(dayCounts), 1);
+  const trophies = [
+    { name: 'Commits', ...getTrophyRank('commits', totalCommits), desc: totalCommits.toLocaleString() },
+    { name: 'Pull Requests', ...getTrophyRank('prs', totalPRs), desc: totalPRs.toLocaleString() },
+    { name: 'Repositories', ...getTrophyRank('repos', publicRepos), desc: `${publicRepos} Repos` },
+    { name: 'Experience', ...getTrophyRank('years', yearsJoined), desc: `${yearsJoined} Years` },
+    { name: 'Issues', ...getTrophyRank('issues', totalIssues), desc: totalIssues.toLocaleString() },
+    { name: 'Stars', ...getTrophyRank('stars', totalStars), desc: `${totalStars} Stars` },
+  ];
 
-  const dayBarsSVG = days.map((day, idx) => {
-    const val = dayCounts[day] || 0;
-    const barH = Math.max(4, Math.round((val / maxDayVal) * 55));
-    const x = 285 + idx * 26;
-    const y = 125 - barH;
+  const trophyItemsSVG = trophies.map((t, i) => {
+    const row = Math.floor(i / 3);
+    const col = i % 3;
+    const x = 25 + col * 151;
+    const y = 52 + row * 62;
+
     return `
-      <g>
-        <rect x="${x}" y="${y}" width="14" height="${barH}" rx="3" class="bar-fill"/>
-        <text x="${x + 7}" y="142" text-anchor="middle" class="chart-label">${day[0]}</text>
+    <g transform="translate(${x}, ${y})">
+      <rect width="143" height="54" rx="6" class="trophy-bg"/>
+      
+      <!-- Trophy Cup Icon -->
+      <g transform="translate(8, 15)">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="${t.color}">
+          <path d="M19 5h-2V3a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v2H5a3 3 0 0 0-3 3v1a5 5 0 0 0 4.14 4.93A6 6 0 0 0 11 15.9V19H8a1 1 0 0 0 0 2h8a1 1 0 0 0 0-2h-3v-3.1a6 6 0 0 0 4.86-2A5 5 0 0 0 22 9V8a3 3 0 0 0-3-3zM5 9V8a1 1 0 0 1 1-1h1v3.86A3 3 0 0 1 5 9zm14 0a3 3 0 0 1-2 1.86V7h1a1 1 0 0 1 1 1z"/>
+        </svg>
       </g>
-    `;
+
+      <!-- Trophy Title & Value -->
+      <text x="36" y="21" class="trophy-title">${t.name}</text>
+      <text x="36" y="39" class="trophy-desc">${t.desc}</text>
+
+      <!-- Rank Badge -->
+      <rect x="111" y="8" width="24" height="17" rx="3" fill="${t.color}" fill-opacity="0.15"/>
+      <text x="123" y="20" text-anchor="middle" font-weight="700" font-size="10.5px" fill="${t.color}">${t.rank}</text>
+    </g>`;
   }).join('');
 
   return `<svg width="495" height="195" viewBox="0 0 495 195" fill="none" xmlns="http://www.w3.org/2000/svg">
   <style>
     .bg { fill: #0d1117; stroke: #30363d; }
     .header { font: 600 16px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #40c463; }
-    .label { font: 400 12px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #8b949e; }
-    .val { font: 600 12px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #ffffff; }
-    .bar-bg { fill: #21262d; rx: 3; }
-    .bar-fill { fill: #40c463; }
-    .divider { stroke: #30363d; stroke-width: 1; }
-    .chart-label { font: 400 10.5px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #8b949e; }
-    .badge { font: 600 11px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #40c463; }
+    .trophy-bg { fill: #161b22; stroke: #30363d; stroke-width: 1; }
+    .trophy-title { font: 600 11px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #ffffff; }
+    .trophy-desc { font: 400 11px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #8b949e; }
 
     @media (prefers-color-scheme: light) {
       .bg { fill: #ffffff; stroke: #e1e4e8; }
       .header { fill: #238636; }
-      .label { fill: #586069; }
-      .val { fill: #24292e; }
-      .bar-bg { fill: #eaecef; }
-      .bar-fill { fill: #238636; }
-      .divider { stroke: #e1e4e8; }
-      .chart-label { fill: #586069; }
-      .badge { fill: #238636; }
+      .trophy-bg { fill: #f6f8fa; stroke: #d0d7de; }
+      .trophy-title { fill: #24292e; }
+      .trophy-desc { fill: #586069; }
     }
   </style>
 
   <rect class="bg" x="0.5" y="0.5" width="494" height="194" rx="4.5" stroke-width="1"/>
-  <text x="25" y="34" class="header">⏰ Productive Hours &amp; Commit Habits</text>
+  <text x="25" y="34" class="header">🏆 GitHub Achievements &amp; Trophies</text>
 
-  <g transform="translate(25, 52)">
-    <text x="0" y="11" class="label">🌅 Morning (06-12h)</text>
-    <rect x="130" y="2" width="${barMaxW}" height="10" class="bar-bg"/>
-    <rect x="130" y="2" width="${Math.round((mPct / 100) * barMaxW)}" height="10" rx="3" class="bar-fill"/>
-    <text x="240" y="11" class="val">${mPct}%</text>
-  </g>
-
-  <g transform="translate(25, 78)">
-    <text x="0" y="11" class="label">☀️ Daytime (12-18h)</text>
-    <rect x="130" y="2" width="${barMaxW}" height="10" class="bar-bg"/>
-    <rect x="130" y="2" width="${Math.round((dPct / 100) * barMaxW)}" height="10" rx="3" class="bar-fill"/>
-    <text x="240" y="11" class="val">${dPct}%</text>
-  </g>
-
-  <g transform="translate(25, 104)">
-    <text x="0" y="11" class="label">🌇 Evening (18-24h)</text>
-    <rect x="130" y="2" width="${barMaxW}" height="10" class="bar-bg"/>
-    <rect x="130" y="2" width="${Math.round((ePct / 100) * barMaxW)}" height="10" rx="3" class="bar-fill"/>
-    <text x="240" y="11" class="val">${ePct}%</text>
-  </g>
-
-  <g transform="translate(25, 130)">
-    <text x="0" y="11" class="label">🌙 Night (00-06h)</text>
-    <rect x="130" y="2" width="${barMaxW}" height="10" class="bar-bg"/>
-    <rect x="130" y="2" width="${Math.round((nPct / 100) * barMaxW)}" height="10" rx="3" class="bar-fill"/>
-    <text x="240" y="11" class="val">${nPct}%</text>
-  </g>
-
-  <line class="divider" x1="268" y1="46" x2="268" y2="168"/>
-
-  <text x="285" y="58" class="chart-label">Day of Week Activity</text>
-  ${dayBarsSVG}
-
-  <g transform="translate(285, 166)">
-    <text x="0" y="0" class="badge">⚡ Peak: ${peakDay} (${peakTime})</text>
-  </g>
-</svg>`;
-}
-
-// 5. Lines of Code & Contribution Breakdown SVG
-function generateLocSVG(data) {
-  const { totalAdd, totalDel, commits, prs, issues, reviews } = data;
-  const totalContrib = commits + prs + issues + reviews || 1;
-
-  const cPct = Math.round((commits / totalContrib) * 100);
-  const prPct = Math.round((prs / totalContrib) * 100);
-  const issPct = Math.round((issues / totalContrib) * 100);
-  const revPct = Math.max(1, 100 - (cPct + prPct + issPct));
-
-  const barW = 444;
-  const cW = Math.round((cPct / 100) * barW);
-  const prW = Math.round((prPct / 100) * barW);
-  const issW = Math.round((issPct / 100) * barW);
-  const revW = Math.max(0, barW - (cW + prW + issW));
-
-  const formatK = (n) => n >= 1000 ? `${(n / 1000).toFixed(1)}k` : n.toLocaleString();
-
-  return `<svg width="495" height="195" viewBox="0 0 495 195" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <style>
-    .bg { fill: #0d1117; stroke: #30363d; }
-    .header { font: 600 16px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #40c463; }
-    .label { font: 400 11.5px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #8b949e; }
-    .val { font: 600 12px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #ffffff; }
-    .num-add { font: 700 18px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #3fb950; }
-    .num-del { font: 700 18px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #f85149; }
-    .num-tot { font: 700 18px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #ffffff; }
-    .sub { font: 400 11px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #8b949e; }
-    .divider { stroke: #30363d; stroke-width: 1; }
-
-    @media (prefers-color-scheme: light) {
-      .bg { fill: #ffffff; stroke: #e1e4e8; }
-      .header { fill: #238636; }
-      .label { fill: #586069; }
-      .val { fill: #24292e; }
-      .num-add { fill: #238636; }
-      .num-del { fill: #cf222e; }
-      .num-tot { fill: #24292e; }
-      .sub { fill: #586069; }
-      .divider { stroke: #e1e4e8; }
-    }
-  </style>
-
-  <rect class="bg" x="0.5" y="0.5" width="494" height="194" rx="4.5" stroke-width="1"/>
-  <text x="25" y="34" class="header">📈 Lines of Code &amp; Contribution Breakdown</text>
-
-  <!-- Multi-segment Progress Bar -->
-  <g transform="translate(25, 48)">
-    <rect x="0" y="0" width="${cW}" height="10" rx="3" fill="#40c463"/>
-    <rect x="${cW}" y="0" width="${prW}" height="10" fill="#58a6ff"/>
-    <rect x="${cW + prW}" y="0" width="${issW}" height="10" fill="#d29922"/>
-    <rect x="${cW + prW + issW}" y="0" width="${revW}" height="10" rx="3" fill="#bc8cff"/>
-  </g>
-
-  <!-- Legend -->
-  <g transform="translate(25, 74)">
-    <circle cx="5" cy="5" r="4" fill="#40c463"/>
-    <text x="14" y="9" class="label">Commits: <tspan class="val">${commits.toLocaleString()}</tspan> (${cPct}%)</text>
-
-    <circle cx="150" cy="5" r="4" fill="#58a6ff"/>
-    <text x="159" y="9" class="label">PRs: <tspan class="val">${prs}</tspan> (${prPct}%)</text>
-
-    <circle cx="255" cy="5" r="4" fill="#d29922"/>
-    <text x="264" y="9" class="label">Issues: <tspan class="val">${issues}</tspan> (${issPct}%)</text>
-
-    <circle cx="360" cy="5" r="4" fill="#bc8cff"/>
-    <text x="369" y="9" class="label">Reviews: <tspan class="val">${reviews}</tspan> (${revPct}%)</text>
-  </g>
-
-  <line class="divider" x1="25" y1="96" x2="470" y2="96"/>
-
-  <!-- LOC Stats: 3 Columns -->
-  <g transform="translate(25, 115)">
-    <text x="0" y="20" class="num-add">+${formatK(totalAdd)}</text>
-    <text x="0" y="42" class="sub">Lines Added</text>
-  </g>
-
-  <g transform="translate(185, 115)">
-    <text x="0" y="20" class="num-del">-${formatK(totalDel)}</text>
-    <text x="0" y="42" class="sub">Lines Deleted</text>
-  </g>
-
-  <g transform="translate(335, 115)">
-    <text x="0" y="20" class="num-tot">${formatK(totalAdd + totalDel)}</text>
-    <text x="0" y="42" class="sub">Total Lines Modified</text>
-  </g>
+  ${trophyItemsSVG}
 </svg>`;
 }
 
@@ -705,28 +409,14 @@ async function main() {
   const stats = await getAllStats();
   console.log('Computed stats successfully.');
 
-  console.log('Analyzing commit habits...');
-  const habits = await getCommitHabits();
-  console.log('Computed habits successfully.');
-
-  console.log('Analyzing LOC stats...');
-  const loc = await getLocStats();
-  console.log('Computed LOC successfully.');
-
   fs.writeFileSync('github-streak.svg', generateStreakSVG(stats));
   console.log('Successfully generated github-streak.svg!');
 
   fs.writeFileSync('github-stats.svg', generateStatsSVG(stats));
   console.log('Successfully generated github-stats.svg!');
 
-  fs.writeFileSync('profile-details.svg', generateProfileDetailsSVG(stats));
-  console.log('Successfully generated profile-details.svg!');
-
-  fs.writeFileSync('productive-hours.svg', generateHabitsSVG(habits));
-  console.log('Successfully generated productive-hours.svg!');
-
-  fs.writeFileSync('loc-stats.svg', generateLocSVG(loc));
-  console.log('Successfully generated loc-stats.svg!');
+  fs.writeFileSync('trophies.svg', generateTrophiesSVG(stats));
+  console.log('Successfully generated trophies.svg!');
 }
 
 main().catch(err => {
