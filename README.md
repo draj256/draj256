@@ -36,13 +36,12 @@
     <!-- Right Column: Live GitHub Stats Card (Green Primary Accent) -->
     <td width="50%" align="center" valign="middle">
       <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="https://github-stats-extended.vercel.app/api?username=draj256&show_icons=true&hide_border=true&title_color=40c463&icon_color=40c463&text_color=ffffff&bg_color=0d1117">
-        <source media="(prefers-color-scheme: light)" srcset="https://github-stats-extended.vercel.app/api?username=draj256&show_icons=true&hide_border=true&title_color=238636&icon_color=238636&text_color=24292e&bg_color=ffffff">
-        <img src="https://github-stats-extended.vercel.app/api?username=draj256&show_icons=true&hide_border=true&title_color=40c463&icon_color=40c463&text_color=ffffff&bg_color=0d1117" width="100%" alt="GitHub Stats" />
+     <img src="./github-stats.svg" width="100%" alt="GitHub Stats" />
       </picture>
     </td>
   </tr>
 </table>
+
 
 
 ---
@@ -76,7 +75,7 @@
     <!-- Right Column: Streak Stats (Green Accent) -->
     <td width="50%" align="center" valign="middle">
       <picture>
-        <img src="./github-stats.svg" alt="GitHub Stats" width="100%" />
+       <img src="./github-streak.svg" width="100%" alt="GitHub Streak" />
       </picture>
     </td>
   </tr>
