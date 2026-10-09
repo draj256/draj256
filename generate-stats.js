@@ -271,6 +271,46 @@ async function getCommitHabits() {
   };
 }
 
+async function getLocStats() {
+  const query = `
+    query($login: String!) {
+      user(login: $login) {
+        pullRequests(first: 100) {
+          nodes {
+            additions
+            deletions
+          }
+        }
+        contributionsCollection {
+          totalCommitContributions
+          restrictedContributionsCount
+          totalPullRequestContributions
+          totalIssueContributions
+          totalPullRequestReviewContributions
+        }
+      }
+    }
+  `;
+  const data = await fetchGraphQL(query, { login: USERNAME });
+  const prs = data.user.pullRequests.nodes;
+  let totalAdd = 0;
+  let totalDel = 0;
+  prs.forEach(p => {
+    totalAdd += p.additions;
+    totalDel += p.deletions;
+  });
+
+  const coll = data.user.contributionsCollection;
+  return {
+    totalAdd,
+    totalDel,
+    commits: coll.totalCommitContributions + coll.restrictedContributionsCount,
+    prs: coll.totalPullRequestContributions,
+    issues: coll.totalIssueContributions,
+    reviews: coll.totalPullRequestReviewContributions,
+  };
+}
+
 // 1. Streak Stats SVG
 function generateStreakSVG(stats) {
   const { totalContributions, totalRange, currentStreak, currRange, longestStreak, longestRange } = stats;
@@ -532,7 +572,6 @@ function generateHabitsSVG(habits) {
   <rect class="bg" x="0.5" y="0.5" width="494" height="194" rx="4.5" stroke-width="1"/>
   <text x="25" y="34" class="header">⏰ Productive Hours &amp; Commit Habits</text>
 
-  <!-- Left: Time of Day Bars -->
   <g transform="translate(25, 52)">
     <text x="0" y="11" class="label">🌅 Morning (06-12h)</text>
     <rect x="130" y="2" width="${barMaxW}" height="10" class="bar-bg"/>
@@ -563,12 +602,100 @@ function generateHabitsSVG(habits) {
 
   <line class="divider" x1="268" y1="46" x2="268" y2="168"/>
 
-  <!-- Right: Day of Week Bars -->
   <text x="285" y="58" class="chart-label">Day of Week Activity</text>
   ${dayBarsSVG}
 
   <g transform="translate(285, 166)">
     <text x="0" y="0" class="badge">⚡ Peak: ${peakDay} (${peakTime})</text>
+  </g>
+</svg>`;
+}
+
+// 5. Lines of Code & Contribution Breakdown SVG
+function generateLocSVG(data) {
+  const { totalAdd, totalDel, commits, prs, issues, reviews } = data;
+  const totalContrib = commits + prs + issues + reviews || 1;
+
+  const cPct = Math.round((commits / totalContrib) * 100);
+  const prPct = Math.round((prs / totalContrib) * 100);
+  const issPct = Math.round((issues / totalContrib) * 100);
+  const revPct = Math.max(1, 100 - (cPct + prPct + issPct));
+
+  const barW = 444;
+  const cW = Math.round((cPct / 100) * barW);
+  const prW = Math.round((prPct / 100) * barW);
+  const issW = Math.round((issPct / 100) * barW);
+  const revW = Math.max(0, barW - (cW + prW + issW));
+
+  const formatK = (n) => n >= 1000 ? `${(n / 1000).toFixed(1)}k` : n.toLocaleString();
+
+  return `<svg width="495" height="195" viewBox="0 0 495 195" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .bg { fill: #0d1117; stroke: #30363d; }
+    .header { font: 600 16px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #40c463; }
+    .label { font: 400 11.5px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #8b949e; }
+    .val { font: 600 12px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #ffffff; }
+    .num-add { font: 700 18px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #3fb950; }
+    .num-del { font: 700 18px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #f85149; }
+    .num-tot { font: 700 18px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #ffffff; }
+    .sub { font: 400 11px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #8b949e; }
+    .divider { stroke: #30363d; stroke-width: 1; }
+
+    @media (prefers-color-scheme: light) {
+      .bg { fill: #ffffff; stroke: #e1e4e8; }
+      .header { fill: #238636; }
+      .label { fill: #586069; }
+      .val { fill: #24292e; }
+      .num-add { fill: #238636; }
+      .num-del { fill: #cf222e; }
+      .num-tot { fill: #24292e; }
+      .sub { fill: #586069; }
+      .divider { stroke: #e1e4e8; }
+    }
+  </style>
+
+  <rect class="bg" x="0.5" y="0.5" width="494" height="194" rx="4.5" stroke-width="1"/>
+  <text x="25" y="34" class="header">📈 Lines of Code &amp; Contribution Breakdown</text>
+
+  <!-- Multi-segment Progress Bar -->
+  <g transform="translate(25, 48)">
+    <rect x="0" y="0" width="${cW}" height="10" rx="3" fill="#40c463"/>
+    <rect x="${cW}" y="0" width="${prW}" height="10" fill="#58a6ff"/>
+    <rect x="${cW + prW}" y="0" width="${issW}" height="10" fill="#d29922"/>
+    <rect x="${cW + prW + issW}" y="0" width="${revW}" height="10" rx="3" fill="#bc8cff"/>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(25, 74)">
+    <circle cx="5" cy="5" r="4" fill="#40c463"/>
+    <text x="14" y="9" class="label">Commits: <tspan class="val">${commits.toLocaleString()}</tspan> (${cPct}%)</text>
+
+    <circle cx="150" cy="5" r="4" fill="#58a6ff"/>
+    <text x="159" y="9" class="label">PRs: <tspan class="val">${prs}</tspan> (${prPct}%)</text>
+
+    <circle cx="255" cy="5" r="4" fill="#d29922"/>
+    <text x="264" y="9" class="label">Issues: <tspan class="val">${issues}</tspan> (${issPct}%)</text>
+
+    <circle cx="360" cy="5" r="4" fill="#bc8cff"/>
+    <text x="369" y="9" class="label">Reviews: <tspan class="val">${reviews}</tspan> (${revPct}%)</text>
+  </g>
+
+  <line class="divider" x1="25" y1="96" x2="470" y2="96"/>
+
+  <!-- LOC Stats: 3 Columns -->
+  <g transform="translate(25, 115)">
+    <text x="0" y="20" class="num-add">+${formatK(totalAdd)}</text>
+    <text x="0" y="42" class="sub">Lines Added</text>
+  </g>
+
+  <g transform="translate(185, 115)">
+    <text x="0" y="20" class="num-del">-${formatK(totalDel)}</text>
+    <text x="0" y="42" class="sub">Lines Deleted</text>
+  </g>
+
+  <g transform="translate(335, 115)">
+    <text x="0" y="20" class="num-tot">${formatK(totalAdd + totalDel)}</text>
+    <text x="0" y="42" class="sub">Total Lines Modified</text>
   </g>
 </svg>`;
 }
@@ -582,6 +709,10 @@ async function main() {
   const habits = await getCommitHabits();
   console.log('Computed habits successfully.');
 
+  console.log('Analyzing LOC stats...');
+  const loc = await getLocStats();
+  console.log('Computed LOC successfully.');
+
   fs.writeFileSync('github-streak.svg', generateStreakSVG(stats));
   console.log('Successfully generated github-streak.svg!');
 
@@ -593,6 +724,9 @@ async function main() {
 
   fs.writeFileSync('productive-hours.svg', generateHabitsSVG(habits));
   console.log('Successfully generated productive-hours.svg!');
+
+  fs.writeFileSync('loc-stats.svg', generateLocSVG(loc));
+  console.log('Successfully generated loc-stats.svg!');
 }
 
 main().catch(err => {
