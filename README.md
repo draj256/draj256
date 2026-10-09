@@ -58,9 +58,9 @@
     <!-- Right Column: Live GitHub Stats Card (Adaptive Black & White) -->
     <td width="50%" align="center" valign="middle">
       <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="https://github-stats-extended.vercel.app/api?username=draj256&show_icons=true&hide_border=true&title_color=ffffff&icon_color=ffffff&text_color=ffffff&bg_color=0d1117">
-        <source media="(prefers-color-scheme: light)" srcset="https://github-stats-extended.vercel.app/api?username=draj256&show_icons=true&hide_border=true&title_color=000000&icon_color=000000&text_color=000000&bg_color=ffffff">
-        <img src="https://github-stats-extended.vercel.app/api?username=draj256&show_icons=true&hide_border=true&title_color=ffffff&icon_color=ffffff&text_color=ffffff&bg_color=0d1117" width="100%" alt="GitHub Stats" />
+        <source media="(prefers-color-scheme: dark)" srcset="https://github-stats-extended.vercel.app/api?username=draj256&show_icons=true&hide_border=true&include_all_commits=true&title_color=ffffff&icon_color=ffffff&text_color=ffffff&bg_color=0d1117">
+        <source media="(prefers-color-scheme: light)" srcset="https://github-stats-extended.vercel.app/api?username=draj256&show_icons=true&hide_border=true&include_all_commits=true&title_color=000000&icon_color=000000&text_color=000000&bg_color=ffffff">
+        <img src="https://github-stats-extended.vercel.app/api?username=draj256&show_icons=true&hide_border=true&include_all_commits=true&title_color=ffffff&icon_color=ffffff&text_color=ffffff&bg_color=0d1117" width="100%" alt="GitHub Stats" />
       </picture>
     </td>
   </tr>
