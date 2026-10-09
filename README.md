@@ -18,47 +18,36 @@
 </div>
 
 ---
+## 👨‍💻 About Me
 
-### 👨‍💻 About Me
+I'm the founder of **[Hoslift](https://hoslift.com)**, a digital solutions, and a full-stack developer interested in building useful, dependable software.
 
-<table width="100%">
-  <tr>
-    <!-- Left Column: About Info -->
-    <td width="50%" valign="middle">
-      <ul>
-        <li>🏢 <b>Founder</b> at <a href="https://hoslift.com">Hoslift</a>.</li>
-        <li>🛠️ <b>Full-Stack Developer</b> passionate about modern web tech.</li>
-        <li>⚡ Creator of <b><a href="https://github.com/hoslift/ranu.js">Ranu.js</a></b> — high-performance tooling.</li>
-        <li>🌍 Based in <b>Sri Lanka</b> 🇱🇰.</li>
-        <li>📫 Let's connect: <b>darshana@hoslift.com</b></li>
-      </ul>
-    </td>
-    <!-- Right Column: Live GitHub Stats Card (Green Primary Accent) -->
-    <td width="50%" align="center" valign="middle">
-      <picture>
-     <img src="./github-stats.svg" width="100%" alt="GitHub Stats" />
-      </picture>
-    </td>
-  </tr>
-</table>
+My work spans web development, digital products, cloud infrastructure, and open source. I enjoy turning ideas into practical systems and improving them through thoughtful engineering.
 
-<table width="100%">
-  <tr>
-    <!-- Left Column: About Info -->
-     <td width="50%" align="center" valign="middle">
-      <picture>
-        <img src="./recent-activity.svg" width="100%" alt="Recent Activity" />
-      </picture>
-    </td>
-  </tr>
-    <!-- Right Column: Live GitHub Stats Card (Green Primary Accent) -->
-    <td width="50%" align="center" valign="middle">
-      <picture>
-     <img src="./github-stats.svg" width="100%" alt="GitHub Stats" />
-      </picture>
-    </td>
-  </tr>
-</table>
+- **Based in:** Sri Lanka
+- **Building:** Digital experiences and software at Hoslift
+- **Open source:** Creator of [Ranu.js](https://github.com/hoslift/ranu.js)
+- **Contact:** [darshana@hoslift.com](mailto:darshana@hoslift.com)
+
+
+## Focus Areas
+
+- **Digital products** — websites, web applications, and tailored software solutions
+- **Full-stack development** — building across frontend and backend systems
+- **Open source** — developing tools and frameworks for the wider developer community
+- **Cloud and infrastructure** — deployment, hosting, and the systems that keep products running
+
+## Featured Project
+
+### [Ranu.js](https://github.com/hoslift/ranu.js)
+
+A TypeScript-focused, full-stack framework project developed under Hoslift.
+
+I'm building Ranu.js with an emphasis on a cohesive developer experience, practical full-stack workflows, and a growing open-source ecosystem.
+
+[![Explore Ranu.js](https://img.shields.io/badge/Explore%20the%20project-2563EB?style=for-the-badge&logo=github&logoColor=white)](https://github.com/hoslift/ranu.js)
+
+
 
 
 ---
