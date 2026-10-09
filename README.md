@@ -64,23 +64,20 @@
 
 <table width="100%">
   <tr>
-    <!-- Left Column: Profile Details & Activity Graph (Green Accent) -->
+    <!-- Left Column: Profile Details & Activity Graph -->
     <td width="50%" align="center" valign="middle">
       <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=draj256&theme=github_dark">
-        <source media="(prefers-color-scheme: light)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=draj256&theme=github">
-        <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=draj256&theme=github_dark" width="100%" alt="Profile Details" />
+        <img src="./profile-details.svg" width="100%" alt="Profile Details" />
       </picture>
     </td>
-    <!-- Right Column: Streak Stats (Green Accent) -->
+    <!-- Right Column: Streak Stats (Green Accent & Streak) -->
     <td width="50%" align="center" valign="middle">
       <picture>
-       <img src="./github-streak.svg" width="100%" alt="GitHub Streak" />
+        <img src="./github-streak.svg" width="100%" alt="GitHub Streak" />
       </picture>
     </td>
   </tr>
 </table>
-
 ---
 
 
