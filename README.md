@@ -48,7 +48,22 @@ I'm building Ranu.js with an emphasis on a cohesive developer experience, practi
 [![Explore Ranu.js](https://img.shields.io/badge/Explore%20the%20project-2563EB?style=for-the-badge&logo=github&logoColor=white)](https://github.com/hoslift/ranu.js)
 
 
-
+<table width="100%">
+  <tr>
+    <!-- Left Column: GitHub Stats -->
+    <td width="50%" align="center" valign="middle">
+      <picture>
+       <img src="./top-langs.svg" width="100%" alt="Top Languages" />
+      </picture>
+    </td>
+    <!-- Right Column: GitHub Trophies -->
+    <td width="50%" align="center" valign="middle">
+      <picture>
+        <img src="./trophies.svg" width="100%" alt="GitHub Trophies" />
+      </picture>
+    </td>
+  </tr>
+</table>
 
 ---
 
