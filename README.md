@@ -1,22 +1,24 @@
 <div align="center">
 
-
 # 👋 Hey Everyone, I'm Darshana Rajapaksha
 ### 🚀 Founder of Hoslift | Full-Stack Developer | Creator of Ranu.js
 
-<!-- Visitor Views (Green) -->
+<!-- Status Badge -->
 <p align="center">
   <img src="https://img.shields.io/badge/STATUS-ACTIVE%20DEVELOPER-8957e5?style=for-the-badge&logo=github&logoColor=white" alt="Status" />
 </p>
-<!-- Social Links (Unified GitHub Green Theme) -->
+
+<!-- Social Links -->
 <p align="center">
   <a href="https://hoslift.com" target="_blank"><img src="https://img.shields.io/badge/Website-hoslift.com-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Website" /></a>
   <a href="mailto:darshana@hoslift.com"><img src="https://img.shields.io/badge/Email-darshana%40hoslift.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" /></a>
   <a href="https://www.linkedin.com/in/YOUR_LINKEDIN_USERNAME" target="_blank"><img src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
 </p>
+
 </div>
 
 ---
+
 ## 👨‍💻 About Me
 
 I'm the founder of **[Hoslift](https://hoslift.com)** and a **Full-Stack Developer** interested in building useful, dependable software.
@@ -50,97 +52,69 @@ I'm building Ranu.js with an emphasis on a cohesive developer experience, practi
 <br />
 
 <a href="https://github.com/hoslift/ranu.js" target="_blank">
-  <img src="https://img.shields.io/badge/Explore%20Ranu.js-33BBCA?style=for-the-badge&logo=github&logoColor=white" alt="Explore Ranu.js" />
+  <img src="https://img.shields.io/badge/Explore%20Ranu.js-238636?style=for-the-badge&logo=github&logoColor=white" alt="Explore Ranu.js" />
+</a>
+<a href="https://github.com/hoslift/ranu.js" target="_blank">
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
 </a>
 
 ---
 
-
-<table width="100%">
-  <tr>
-    <!-- Left Column: GitHub Stats -->
-    <td width="50%" align="center" valign="middle">
-      <picture>
-       <img src="./github-stats.svg" width="100%" alt="GitHub Stats" />
-      </picture>
-    </td>
-    <!-- Right Column: GitHub Trophies -->
-    <td width="50%" align="center" valign="middle">
-      <picture>
-        <img src="./github-streak.svg" width="100%" alt="GitHub Streak" />
-      </picture>
-    </td>
-  </tr>
-</table>
-
----
-
-### 🛠️ Tech Stack & Skills
+## 🛠️ Tech Stack & Skills
 
 <p align="center">
-  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
-  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" />
-  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" />
-  <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black" />
-  <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" />
-  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
-  <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" />
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js" />
+  <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React" />
+  <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Git" />
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
+  <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="Linux" />
 </p>
 
 ---
 
-### 📊 GitHub Activity & Statistics
+## 📊 GitHub Analytics & Activity Suite
 
 <table width="100%">
+  <!-- Row 1: Overall Stats & Streak (Core Highlights) -->
   <tr>
-    <!-- Left Column: Profile Details & Activity Graph -->
     <td width="50%" align="center" valign="middle">
-      <picture>
-        <img src="./profile-details.svg" width="100%" alt="Profile Details" />
-      </picture>
+      <img src="./github-stats.svg" width="100%" alt="GitHub Stats" />
     </td>
-    <!-- Right Column: Streak Stats (Green Accent & Streak) -->
     <td width="50%" align="center" valign="middle">
-      <picture>
-       <img src="./recent-activity.svg" width="100%" alt="Recent Activity" />
-      </picture>
+      <img src="./github-streak.svg" width="100%" alt="GitHub Streak" />
     </td>
   </tr>
-</table>
-<table width="100%">
+  <!-- Row 2: Profile Details Curve & Recent Activity Timeline -->
   <tr>
-    <!-- Left Column: Profile Details & Activity Graph -->
     <td width="50%" align="center" valign="middle">
-    <picture>
-    <img src="./productive-hours.svg" width="100%" alt="Productive Hours" />
-  </picture>
+      <img src="./profile-details.svg" width="100%" alt="Profile Details" />
     </td>
-    <!-- Right Column: Streak Stats (Green Accent & Streak) -->
     <td width="50%" align="center" valign="middle">
-      <picture>
-        <img src="./loc-stats.svg" width="100%" alt="Lines of Code & Contribution Breakdown" />
-      </picture>
+      <img src="./recent-activity.svg" width="100%" alt="Recent Activity" />
+    </td>
+  </tr>
+  <!-- Row 3: Productive Habits & Lines of Code Breakdown -->
+  <tr>
+    <td width="50%" align="center" valign="middle">
+      <img src="./productive-hours.svg" width="100%" alt="Productive Hours" />
+    </td>
+    <td width="50%" align="center" valign="middle">
+      <img src="./loc-stats.svg" width="100%" alt="Lines of Code" />
+    </td>
+  </tr>
+  <!-- Row 4: Top Languages & Achievements/Trophies -->
+  <tr>
+    <td width="50%" align="center" valign="middle">
+      <img src="./top-langs.svg" width="100%" alt="Top Languages" />
+    </td>
+    <td width="50%" align="center" valign="middle">
+      <img src="./trophies.svg" width="100%" alt="GitHub Trophies" />
     </td>
   </tr>
 </table>
 
-<table width="100%">
-  <tr>
-    <!-- Left Column: GitHub Stats -->
-    <td width="50%" align="center" valign="middle">
-      <picture>
-       <img src="./top-langs.svg" width="100%" alt="Top Languages" />
-      </picture>
-    </td>
-    <!-- Right Column: GitHub Trophies -->
-    <td width="50%" align="center" valign="middle">
-      <picture>
-        <img src="./trophies.svg" width="100%" alt="GitHub Trophies" />
-      </picture>
-    </td>
-  </tr>
-</table>
 ---
-
 
 <!-- GitHub Profile by draj256 -->
