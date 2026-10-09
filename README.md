@@ -44,26 +44,6 @@
   </tr>
 </table>
 
-<table width="100%">
-  <tr>
-    <!-- Left Column: About Info -->
-    <td width="50%" valign="middle">
-      <ul>
-        <li>🏢 <b>Founder</b> at <a href="https://hoslift.com">Hoslift</a>.</li>
-        <li>🛠️ <b>Full-Stack Developer</b> passionate about modern web tech.</li>
-        <li>⚡ Creator of <b><a href="https://github.com/hoslift/ranu.js">Ranu.js</a></b> — high-performance tooling.</li>
-        <li>🌍 Based in <b>Sri Lanka</b> 🇱🇰.</li>
-        <li>📫 Let's connect: <b>darshana@hoslift.com</b></li>
-      </ul>
-    </td>
-    <!-- Right Column: Live GitHub Stats Card (Green Primary Accent) -->
-    <td width="50%" align="center" valign="middle">
-      <picture>
-       <img src="./github-stats.svg" alt="GitHub Stats" width="100%" />
-      </picture>
-    </td>
-  </tr>
-</table>
 
 ---
 
@@ -96,9 +76,7 @@
     <!-- Right Column: Streak Stats (Green Accent) -->
     <td width="50%" align="center" valign="middle">
       <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com/?user=draj256&background=0d1117&border=0d1117&stroke=40c463&ring=40c463&fire=40c463&currStreakLabel=40c463&sideNums=ffffff&currStreakNum=ffffff&sideLabels=ffffff&dates=8b949e">
-        <source media="(prefers-color-scheme: light)" srcset="https://streak-stats.demolab.com/?user=draj256&background=ffffff&border=e1e4e8&stroke=238636&ring=238636&fire=238636&currStreakLabel=238636&sideNums=24292e&currStreakNum=24292e&sideLabels=24292e&dates=586069">
-        <img src="https://streak-stats.demolab.com/?user=draj256&background=0d1117&border=0d1117&stroke=40c463&ring=40c463&fire=40c463&currStreakLabel=40c463&sideNums=ffffff&currStreakNum=ffffff&sideLabels=ffffff&dates=8b949e" width="100%" alt="GitHub Streak" />
+        <img src="./github-stats.svg" alt="GitHub Stats" width="100%" />
       </picture>
     </td>
   </tr>
