@@ -94,6 +94,23 @@
     </td>
   </tr>
 </table>
+
+<table width="100%">
+  <tr>
+    <!-- Left Column: GitHub Stats -->
+    <td width="50%" align="center" valign="middle">
+      <picture>
+        <img src="./github-stats.svg" width="100%" alt="GitHub Stats" />
+      </picture>
+    </td>
+    <!-- Right Column: GitHub Trophies -->
+    <td width="50%" align="center" valign="middle">
+      <picture>
+        <img src="./trophies.svg" width="100%" alt="GitHub Trophies" />
+      </picture>
+    </td>
+  </tr>
+</table>
 ---
 
 
