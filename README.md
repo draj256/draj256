@@ -42,6 +42,23 @@
   </tr>
 </table>
 
+<table width="100%">
+  <tr>
+    <!-- Left Column: About Info -->
+     <td width="50%" align="center" valign="middle">
+      <picture>
+        <img src="./recent-activity.svg" width="100%" alt="Recent Activity" />
+      </picture>
+    </td>
+  </tr>
+    <!-- Right Column: Live GitHub Stats Card (Green Primary Accent) -->
+    <td width="50%" align="center" valign="middle">
+      <picture>
+     <img src="./github-stats.svg" width="100%" alt="GitHub Stats" />
+      </picture>
+    </td>
+  </tr>
+</table>
 
 
 ---
