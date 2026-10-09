@@ -121,7 +121,6 @@ async function getAllStats() {
   const todayStr = new Date().toISOString().slice(0, 10);
   const pastDays = sortedDays.filter(d => d.date <= todayStr);
 
-  // Group past 12 months contributions for activity curve
   const monthlyData = new Array(12).fill(0);
   const now = new Date();
   for (const d of pastDays) {
@@ -206,7 +205,73 @@ async function getAllStats() {
   };
 }
 
-// 1. Streak Stats SVG (Green Accent)
+async function getCommitHabits() {
+  const res = await fetch(`https://api.github.com/search/commits?q=author:${USERNAME}&sort=author-date&order=desc&per_page=100`, {
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+      Accept: 'application/vnd.github.cloak-preview',
+      'User-Agent': 'github-habits-analyzer',
+    },
+  });
+  const data = await res.json();
+  const dayCounts = { Mon: 0, Tue: 0, Wed: 0, Thu: 0, Fri: 0, Sat: 0, Sun: 0 };
+  const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const fullDayNames = {
+    Sun: 'Sunday', Mon: 'Monday', Tue: 'Tuesday', Wed: 'Wednesday',
+    Thu: 'Thursday', Fri: 'Friday', Sat: 'Saturday'
+  };
+
+  let morning = 0;
+  let daytime = 0;
+  let evening = 0;
+  let night = 0;
+
+  if (data.items && data.items.length > 0) {
+    for (const item of data.items) {
+      if (!item.commit || !item.commit.author || !item.commit.author.date) continue;
+      const d = new Date(item.commit.author.date);
+      const h = d.getHours();
+      const dayName = dayNames[d.getDay()];
+      dayCounts[dayName] = (dayCounts[dayName] || 0) + 1;
+
+      if (h >= 6 && h < 12) morning++;
+      else if (h >= 12 && h < 18) daytime++;
+      else if (h >= 18 && h < 24) evening++;
+      else night++;
+    }
+  }
+
+  let peakDayKey = 'Fri';
+  let maxDayCount = -1;
+  for (const [day, count] of Object.entries(dayCounts)) {
+    if (count > maxDayCount) {
+      maxDayCount = count;
+      peakDayKey = day;
+    }
+  }
+
+  const timeBuckets = { Morning: morning, Daytime: daytime, Evening: evening, Night: night };
+  let peakTime = 'Daytime';
+  let maxTimeCount = -1;
+  for (const [bucket, count] of Object.entries(timeBuckets)) {
+    if (count > maxTimeCount) {
+      maxTimeCount = count;
+      peakTime = bucket;
+    }
+  }
+
+  return {
+    morning,
+    daytime,
+    evening,
+    night,
+    dayCounts,
+    peakDay: fullDayNames[peakDayKey] || 'Friday',
+    peakTime,
+  };
+}
+
+// 1. Streak Stats SVG
 function generateStreakSVG(stats) {
   const { totalContributions, totalRange, currentStreak, currRange, longestStreak, longestRange } = stats;
 
@@ -257,7 +322,7 @@ function generateStreakSVG(stats) {
 </svg>`;
 }
 
-// 2. Stats Card SVG (Rank Circle & Icons)
+// 2. Stats Card SVG
 function generateStatsSVG(stats) {
   const { displayName, totalCommits, totalPRs, totalIssues, totalStars, totalContributedTo } = stats;
 
@@ -317,7 +382,7 @@ function generateStatsSVG(stats) {
 </svg>`;
 }
 
-// 3. Profile Details SVG (User Info & Contribution Curve)
+// 3. Profile Details SVG
 function generateProfileDetailsSVG(stats) {
   const { displayName, username, userEmail, publicRepos, yearsJoined, totalContributions, monthlyData } = stats;
 
@@ -371,7 +436,6 @@ function generateProfileDetailsSVG(stats) {
 
   <rect class="bg" x="0.5" y="0.5" width="494" height="194" rx="4.5" stroke-width="1"/>
 
-  <!-- Left: User Details -->
   <text x="25" y="36" class="header-name">${username} (${displayName.slice(0, 15)}...)</text>
 
   <g transform="translate(25, 54)">
@@ -402,14 +466,10 @@ function generateProfileDetailsSVG(stats) {
     <text x="22" y="11" class="sub-item">${userEmail}</text>
   </g>
 
-  <!-- Right: Activity Graph -->
   <text x="${chartX + chartW}" y="25" text-anchor="end" class="chart-label">contributions in the last year</text>
-
   <path class="chart-area" d="${areaD}"/>
   <path class="chart-line" d="${pathD}"/>
-
   <line class="axis" x1="${chartX}" y1="${chartY + chartH}" x2="${chartX + chartW}" y2="${chartY + chartH}"/>
-
   <text x="${chartX}" y="${chartY + chartH + 18}" class="chart-label">Oct</text>
   <text x="${chartX + chartW * 0.25}" y="${chartY + chartH + 18}" text-anchor="middle" class="chart-label">Jan</text>
   <text x="${chartX + chartW * 0.5}" y="${chartY + chartH + 18}" text-anchor="middle" class="chart-label">Apr</text>
@@ -418,27 +478,7 @@ function generateProfileDetailsSVG(stats) {
 </svg>`;
 }
 
-async function main() {
-  console.log('Fetching verified stats from GitHub API...');
-  const stats = await getAllStats();
-  console.log('Computed stats:', stats);
-
-  fs.writeFileSync('github-streak.svg', generateStreakSVG(stats));
-  console.log('Successfully generated github-streak.svg!');
-
-  fs.writeFileSync('github-stats.svg', generateStatsSVG(stats));
-  console.log('Successfully generated github-stats.svg!');
-
-  fs.writeFileSync('profile-details.svg', generateProfileDetailsSVG(stats));
-  console.log('Successfully generated profile-details.svg!');
-}
-
-main().catch(err => {
-  console.error(err);
-  process.exit(1);
-});
-
-// Productive Hours & Commit Habits SVG Generator
+// 4. Productive Hours & Commit Habits SVG
 function generateHabitsSVG(habits) {
   const { morning, daytime, evening, night, dayCounts, peakDay, peakTime } = habits;
   const total = morning + daytime + evening + night || 1;
@@ -532,3 +572,30 @@ function generateHabitsSVG(habits) {
   </g>
 </svg>`;
 }
+
+async function main() {
+  console.log('Fetching verified stats from GitHub API...');
+  const stats = await getAllStats();
+  console.log('Computed stats successfully.');
+
+  console.log('Analyzing commit habits...');
+  const habits = await getCommitHabits();
+  console.log('Computed habits successfully.');
+
+  fs.writeFileSync('github-streak.svg', generateStreakSVG(stats));
+  console.log('Successfully generated github-streak.svg!');
+
+  fs.writeFileSync('github-stats.svg', generateStatsSVG(stats));
+  console.log('Successfully generated github-stats.svg!');
+
+  fs.writeFileSync('profile-details.svg', generateProfileDetailsSVG(stats));
+  console.log('Successfully generated profile-details.svg!');
+
+  fs.writeFileSync('productive-hours.svg', generateHabitsSVG(habits));
+  console.log('Successfully generated productive-hours.svg!');
+}
+
+main().catch(err => {
+  console.error(err);
+  process.exit(1);
+});
