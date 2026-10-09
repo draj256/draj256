@@ -58,9 +58,9 @@
     <!-- Right Column: Live GitHub Stats Card (Adaptive Black & White) -->
     <td width="50%" align="center" valign="middle">
       <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="https://github-stats-extended.vercel.app/api?username=draj256&show_icons=true&hide_border=true&include_all_commits=true&title_color=ffffff&icon_color=ffffff&text_color=ffffff&bg_color=0d1117">
-        <source media="(prefers-color-scheme: light)" srcset="https://github-stats-extended.vercel.app/api?username=draj256&show_icons=true&hide_border=true&include_all_commits=true&title_color=000000&icon_color=000000&text_color=000000&bg_color=ffffff">
-        <img src="https://github-stats-extended.vercel.app/api?username=draj256&show_icons=true&hide_border=true&include_all_commits=true&title_color=ffffff&icon_color=ffffff&text_color=ffffff&bg_color=0d1117" width="100%" alt="GitHub Stats" />
+        <source media="(prefers-color-scheme: dark)" srcset="https://github-stats-extended.vercel.app/api?username=draj256&show_icons=true&hide_border=true&include_all_commits=true&title_color=ffffff&icon_color=ffffff&text_color=ffffff&bg_color=0d1117&v=3">
+        <source media="(prefers-color-scheme: light)" srcset="https://github-stats-extended.vercel.app/api?username=draj256&show_icons=true&hide_border=true&include_all_commits=true&title_color=000000&icon_color=000000&text_color=000000&bg_color=ffffff&v=3">
+        <img src="https://github-stats-extended.vercel.app/api?username=draj256&show_icons=true&hide_border=true&include_all_commits=true&title_color=ffffff&icon_color=ffffff&text_color=ffffff&bg_color=0d1117&v=3" width="100%" alt="GitHub Stats" />
       </picture>
     </td>
   </tr>
@@ -117,17 +117,17 @@
     <!-- Left Column: Profile Details & Activity Graph (Adaptive Black & White) -->
     <td width="50%" align="center" valign="middle">
       <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=draj256&theme=github_dark">
-        <source media="(prefers-color-scheme: light)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=draj256&theme=github">
-        <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=draj256&theme=github_dark" width="100%" alt="Profile Details" />
+        <source media="(prefers-color-scheme: dark)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=draj256&theme=github_dark&v=3">
+        <source media="(prefers-color-scheme: light)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=draj256&theme=github&v=3">
+        <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=draj256&theme=github_dark&v=3" width="100%" alt="Profile Details" />
       </picture>
     </td>
     <!-- Right Column: Streak Stats (Adaptive Black & White) -->
     <td width="50%" align="center" valign="middle">
       <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com/?user=draj256&background=0d1117&border=0d1117&stroke=ffffff&ring=ffffff&fire=ffffff&currStreakLabel=ffffff&sideNums=ffffff&currStreakNum=ffffff&sideLabels=ffffff&dates=8b949e">
-        <source media="(prefers-color-scheme: light)" srcset="https://streak-stats.demolab.com/?user=draj256&background=ffffff&border=e1e4e8&stroke=000000&ring=000000&fire=000000&currStreakLabel=000000&sideNums=000000&currStreakNum=000000&sideLabels=000000&dates=586069">
-        <img src="https://streak-stats.demolab.com/?user=draj256&background=0d1117&border=0d1117&stroke=ffffff&ring=ffffff&fire=ffffff&currStreakLabel=ffffff&sideNums=ffffff&currStreakNum=ffffff&sideLabels=ffffff&dates=8b949e" width="100%" alt="GitHub Streak" />
+        <source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com/?user=draj256&background=0d1117&border=0d1117&stroke=ffffff&ring=ffffff&fire=ffffff&currStreakLabel=ffffff&sideNums=ffffff&currStreakNum=ffffff&sideLabels=ffffff&dates=8b949e&v=3">
+        <source media="(prefers-color-scheme: light)" srcset="https://streak-stats.demolab.com/?user=draj256&background=ffffff&border=e1e4e8&stroke=000000&ring=000000&fire=000000&currStreakLabel=000000&sideNums=000000&currStreakNum=000000&sideLabels=000000&dates=586069&v=3">
+        <img src="https://streak-stats.demolab.com/?user=draj256&background=0d1117&border=0d1117&stroke=ffffff&ring=ffffff&fire=ffffff&currStreakLabel=ffffff&sideNums=ffffff&currStreakNum=ffffff&sideLabels=ffffff&dates=8b949e&v=3" width="100%" alt="GitHub Streak" />
       </picture>
     </td>
   </tr>
