@@ -78,6 +78,22 @@
     </td>
   </tr>
 </table>
+<table width="100%">
+  <tr>
+    <!-- Left Column: Profile Details & Activity Graph -->
+    <td width="50%" align="center" valign="middle">
+    <picture>
+    <img src="./productive-hours.svg" width="100%" alt="Productive Hours" />
+  </picture>
+    </td>
+    <!-- Right Column: Streak Stats (Green Accent & Streak) -->
+    <td width="50%" align="center" valign="middle">
+      <picture>
+        <img src="./github-streak.svg" width="100%" alt="GitHub Streak" />
+      </picture>
+    </td>
+  </tr>
+</table>
 ---
 
 
