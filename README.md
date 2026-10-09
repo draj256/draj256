@@ -100,7 +100,7 @@
     <!-- Left Column: GitHub Stats -->
     <td width="50%" align="center" valign="middle">
       <picture>
-        <img src="./github-stats.svg" width="100%" alt="GitHub Stats" />
+       <img src="./top-langs.svg" width="100%" alt="Top Languages" />
       </picture>
     </td>
     <!-- Right Column: GitHub Trophies -->
