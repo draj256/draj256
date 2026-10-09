@@ -19,32 +19,41 @@
 ---
 ## 👨‍💻 About Me
 
-I'm the founder of **[Hoslift](https://hoslift.com)**, a digital solutions, and a full-stack developer interested in building useful, dependable software.
+I'm the founder of **[Hoslift](https://hoslift.com)** and a **Full-Stack Developer** interested in building useful, dependable software.
 
 My work spans web development, digital products, cloud infrastructure, and open source. I enjoy turning ideas into practical systems and improving them through thoughtful engineering.
 
-- **Based in:** Sri Lanka
-- **Building:** Digital experiences and software at Hoslift
-- **Open source:** Creator of [Ranu.js](https://github.com/hoslift/ranu.js)
-- **Contact:** [darshana@hoslift.com](mailto:darshana@hoslift.com)
+- 🌍 **Based in:** Sri Lanka 🇱🇰
+- 🏢 **Building:** Digital experiences and software at **[Hoslift](https://hoslift.com)**
+- ⚡ **Open source:** Creator of **[Ranu.js](https://github.com/hoslift/ranu.js)**
+- 📫 **Contact:** **[darshana@hoslift.com](mailto:darshana@hoslift.com)**
 
+---
 
-## Focus Areas
+## 🎯 Focus Areas
 
-- **Digital products** — websites, web applications, and tailored software solutions
-- **Full-stack development** — building across frontend and backend systems
-- **Open source** — developing tools and frameworks for the wider developer community
-- **Cloud and infrastructure** — deployment, hosting, and the systems that keep products running
+- 🌐 **Digital products** — websites, web applications, and tailored software solutions
+- ⚙️ **Full-stack development** — building across frontend and backend systems
+- 📦 **Open source** — developing tools and frameworks for the wider developer community
+- ☁️ **Cloud and infrastructure** — deployment, hosting, and systems architecture
 
-## Featured Project
+---
 
-### [Ranu.js](https://github.com/hoslift/ranu.js)
+## 🚀 Featured Project
+
+### ⚡ **[Ranu.js](https://github.com/hoslift/ranu.js)**
 
 A TypeScript-focused, full-stack framework project developed under Hoslift.
 
 I'm building Ranu.js with an emphasis on a cohesive developer experience, practical full-stack workflows, and a growing open-source ecosystem.
 
-[![Explore Ranu.js](https://img.shields.io/badge/Explore%20the%20project-33BBCA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/hoslift/ranu.js)
+<br />
+
+<a href="https://github.com/hoslift/ranu.js" target="_blank">
+  <img src="https://img.shields.io/badge/Explore%20Ranu.js-33BBCA?style=for-the-badge&logo=github&logoColor=white" alt="Explore Ranu.js" />
+</a>
+
+---
 
 
 <table width="100%">
