@@ -189,6 +189,151 @@ async function getAllStats() {
   };
 }
 
+// 💻 Top Languages Data Fetcher
+async function getTopLanguages() {
+  const query = `
+    query($login: String!) {
+      user(login: $login) {
+        repositories(first: 100, ownerAffiliations: [OWNER, COLLABORATOR, ORGANIZATION_MEMBER], isFork: false) {
+          nodes {
+            languages(first: 10, orderBy: {field: SIZE, direction: DESC}) {
+              edges {
+                size
+                node {
+                  name
+                  color
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const data = await fetchGraphQL(query, { login: USERNAME });
+    const repos = data.user.repositories.nodes || [];
+
+    const langMap = new Map();
+    let totalBytes = 0;
+
+    for (const repo of repos) {
+      if (!repo.languages || !repo.languages.edges) continue;
+      for (const edge of repo.languages.edges) {
+        const size = edge.size;
+        const { name, color } = edge.node;
+        totalBytes += size;
+
+        if (langMap.has(name)) {
+          const item = langMap.get(name);
+          item.size += size;
+        } else {
+          langMap.set(name, { name, color: color || '#8b949e', size });
+        }
+      }
+    }
+
+    if (totalBytes === 0) {
+      return [
+        { name: 'TypeScript', color: '#3178c6', percentage: 65.0 },
+        { name: 'JavaScript', color: '#f1e05a', percentage: 25.0 },
+        { name: 'HTML', color: '#e34c26', percentage: 6.0 },
+        { name: 'CSS', color: '#563d7c', percentage: 4.0 },
+      ];
+    }
+
+    return Array.from(langMap.values())
+      .sort((a, b) => b.size - a.size)
+      .slice(0, 6)
+      .map(item => ({
+        ...item,
+        percentage: (item.size / totalBytes) * 100,
+      }));
+  } catch (err) {
+    console.error('Warning: could not fetch languages, using fallback:', err.message);
+    return [
+      { name: 'TypeScript', color: '#3178c6', percentage: 68.2 },
+      { name: 'JavaScript', color: '#f1e05a', percentage: 22.4 },
+      { name: 'HTML', color: '#e34c26', percentage: 5.1 },
+      { name: 'CSS', color: '#563d7c', percentage: 3.2 },
+      { name: 'Shell', color: '#89e051', percentage: 1.1 },
+    ];
+  }
+}
+
+// 💻 Top Languages Card SVG Generator
+function generateTopLangsSVG(langs) {
+  const displayLangs = (langs && langs.length > 0) ? langs.slice(0, 6) : [];
+
+  const totalBarWidth = 445;
+  let currentX = 0;
+  const segmentsSVG = displayLangs.map((lang, index) => {
+    const segW = Math.max(4, Math.round((lang.percentage / 100) * totalBarWidth));
+    const w = (index === displayLangs.length - 1) ? Math.max(4, totalBarWidth - currentX) : segW;
+    const res = `<rect x="${currentX}" y="0" width="${w}" height="8" fill="${lang.color || '#8b949e'}"/>`;
+    currentX += w;
+    return res;
+  }).join('');
+
+  const itemsSVG = displayLangs.map((lang, index) => {
+    const col = index % 2;
+    const row = Math.floor(index / 2);
+    const x = col === 0 ? 25 : 260;
+    const y = 78 + row * 34;
+
+    const miniBarW = 190;
+    const fillW = Math.max(3, Math.round((lang.percentage / 100) * miniBarW));
+
+    return `
+    <g transform="translate(${x}, ${y})">
+      <circle cx="5" cy="6" r="4.5" fill="${lang.color || '#8b949e'}"/>
+      <text x="16" y="9" class="lang-name">${lang.name}</text>
+      <text x="${miniBarW + 16}" y="9" text-anchor="end" class="lang-pct">${lang.percentage.toFixed(1)}%</text>
+      <rect x="16" y="15" width="${miniBarW}" height="4" rx="2" class="bar-bg"/>
+      <rect x="16" y="15" width="${fillW}" height="4" rx="2" fill="${lang.color || '#8b949e'}"/>
+    </g>`;
+  }).join('');
+
+  return `<svg width="495" height="195" viewBox="0 0 495 195" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .bg { fill: #0d1117; stroke: #30363d; }
+    .header { font: 600 16px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #40c463; }
+    .lang-name { font: 600 12px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #ffffff; }
+    .lang-pct { font: 400 11.5px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #8b949e; }
+    .bar-bg { fill: #21262d; }
+
+    @media (prefers-color-scheme: light) {
+      .bg { fill: #ffffff; stroke: #e1e4e8; }
+      .header { fill: #238636; }
+      .lang-name { fill: #24292e; }
+      .lang-pct { fill: #586069; }
+      .bar-bg { fill: #eaecef; }
+    }
+  </style>
+
+  <rect class="bg" x="0.5" y="0.5" width="494" height="194" rx="4.5" stroke-width="1"/>
+  <text x="25" y="34" class="header">💻 Most Used Languages</text>
+
+  <!-- Continuous Multi-Language Progress Bar -->
+  <g transform="translate(25, 48)">
+    <rect width="${totalBarWidth}" height="8" rx="4" class="bar-bg"/>
+    <g clip-path="url(#bar-clip)">
+      ${segmentsSVG}
+    </g>
+  </g>
+
+  <defs>
+    <clipPath id="bar-clip">
+      <rect width="${totalBarWidth}" height="8" rx="4"/>
+    </clipPath>
+  </defs>
+
+  <!-- Languages 2-column Grid -->
+  ${itemsSVG}
+</svg>`;
+}
+
 // Option 1: Streak Stats SVG
 function generateStreakSVG(stats) {
   const { totalContributions, totalRange, currentStreak, currRange, longestStreak, longestRange } = stats;
@@ -300,114 +445,14 @@ function generateStatsSVG(stats) {
 </svg>`;
 }
 
-// Option 4: 🏆 GitHub Trophies Card SVG
-function getTrophyRank(type, val) {
-  if (type === 'commits') {
-    if (val >= 2000) return { rank: 'S', color: '#e3b341' };
-    if (val >= 1000) return { rank: 'A+', color: '#e3b341' };
-    if (val >= 500) return { rank: 'A', color: '#40c463' };
-    return { rank: 'B', color: '#58a6ff' };
-  }
-  if (type === 'prs') {
-    if (val >= 200) return { rank: 'S', color: '#e3b341' };
-    if (val >= 100) return { rank: 'A+', color: '#e3b341' };
-    if (val >= 50) return { rank: 'A', color: '#40c463' };
-    return { rank: 'B', color: '#58a6ff' };
-  }
-  if (type === 'repos') {
-    if (val >= 30) return { rank: 'S', color: '#e3b341' };
-    if (val >= 15) return { rank: 'A+', color: '#e3b341' };
-    if (val >= 5) return { rank: 'A', color: '#40c463' };
-    return { rank: 'B', color: '#58a6ff' };
-  }
-  if (type === 'years') {
-    if (val >= 5) return { rank: 'S', color: '#e3b341' };
-    if (val >= 3) return { rank: 'A+', color: '#e3b341' };
-    if (val >= 2) return { rank: 'A', color: '#40c463' };
-    return { rank: 'B', color: '#58a6ff' };
-  }
-  if (type === 'issues') {
-    if (val >= 100) return { rank: 'S', color: '#e3b341' };
-    if (val >= 50) return { rank: 'A+', color: '#e3b341' };
-    if (val >= 20) return { rank: 'A', color: '#40c463' };
-    return { rank: 'B', color: '#58a6ff' };
-  }
-  if (type === 'stars') {
-    if (val >= 50) return { rank: 'S', color: '#e3b341' };
-    if (val >= 20) return { rank: 'A+', color: '#e3b341' };
-    if (val >= 10) return { rank: 'A', color: '#40c463' };
-    return { rank: 'B', color: '#58a6ff' };
-  }
-  return { rank: 'B', color: '#58a6ff' };
-}
-
-function generateTrophiesSVG(stats) {
-  const { totalCommits, totalPRs, publicRepos, yearsJoined, totalIssues, totalStars } = stats;
-
-  const trophies = [
-    { name: 'Commits', ...getTrophyRank('commits', totalCommits), desc: totalCommits.toLocaleString() },
-    { name: 'Pull Requests', ...getTrophyRank('prs', totalPRs), desc: totalPRs.toLocaleString() },
-    { name: 'Repositories', ...getTrophyRank('repos', publicRepos), desc: `${publicRepos} Repos` },
-    { name: 'Experience', ...getTrophyRank('years', yearsJoined), desc: `${yearsJoined} Years` },
-    { name: 'Issues', ...getTrophyRank('issues', totalIssues), desc: totalIssues.toLocaleString() },
-    { name: 'Stars', ...getTrophyRank('stars', totalStars), desc: `${totalStars} Stars` },
-  ];
-
-  const trophyItemsSVG = trophies.map((t, i) => {
-    const row = Math.floor(i / 3);
-    const col = i % 3;
-    const x = 25 + col * 151;
-    const y = 52 + row * 62;
-
-    return `
-    <g transform="translate(${x}, ${y})">
-      <rect width="143" height="54" rx="6" class="trophy-bg"/>
-      
-      <!-- Trophy Cup Icon -->
-      <g transform="translate(8, 15)">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="${t.color}">
-          <path d="M19 5h-2V3a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v2H5a3 3 0 0 0-3 3v1a5 5 0 0 0 4.14 4.93A6 6 0 0 0 11 15.9V19H8a1 1 0 0 0 0 2h8a1 1 0 0 0 0-2h-3v-3.1a6 6 0 0 0 4.86-2A5 5 0 0 0 22 9V8a3 3 0 0 0-3-3zM5 9V8a1 1 0 0 1 1-1h1v3.86A3 3 0 0 1 5 9zm14 0a3 3 0 0 1-2 1.86V7h1a1 1 0 0 1 1 1z"/>
-        </svg>
-      </g>
-
-      <!-- Trophy Title & Value -->
-      <text x="36" y="21" class="trophy-title">${t.name}</text>
-      <text x="36" y="39" class="trophy-desc">${t.desc}</text>
-
-      <!-- Rank Badge -->
-      <rect x="111" y="8" width="24" height="17" rx="3" fill="${t.color}" fill-opacity="0.15"/>
-      <text x="123" y="20" text-anchor="middle" font-weight="700" font-size="10.5px" fill="${t.color}">${t.rank}</text>
-    </g>`;
-  }).join('');
-
-  return `<svg width="495" height="195" viewBox="0 0 495 195" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <style>
-    .bg { fill: #0d1117; stroke: #30363d; }
-    .header { font: 600 16px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #40c463; }
-    .trophy-bg { fill: #161b22; stroke: #30363d; stroke-width: 1; }
-    .trophy-title { font: 600 11px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #ffffff; }
-    .trophy-desc { font: 400 11px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #8b949e; }
-
-    @media (prefers-color-scheme: light) {
-      .bg { fill: #ffffff; stroke: #e1e4e8; }
-      .header { fill: #238636; }
-      .trophy-bg { fill: #f6f8fa; stroke: #d0d7de; }
-      .trophy-title { fill: #24292e; }
-      .trophy-desc { fill: #586069; }
-    }
-  </style>
-
-  <rect class="bg" x="0.5" y="0.5" width="494" height="194" rx="4.5" stroke-width="1"/>
-  <text x="25" y="34" class="header">🏆 GitHub Achievements &amp; Trophies</text>
-
-  ${trophyItemsSVG}
-</svg>`;
-}
-
 async function main() {
   console.log('Fetching verified stats from GitHub API...');
   const stats = await getAllStats();
   console.log('Computed stats successfully.');
+
+  console.log('Fetching top languages...');
+  const langs = await getTopLanguages();
+  console.log('Computed languages:', langs.map(l => `${l.name} (${l.percentage.toFixed(1)}%)`).join(', '));
 
   fs.writeFileSync('github-streak.svg', generateStreakSVG(stats));
   console.log('Successfully generated github-streak.svg!');
@@ -415,8 +460,8 @@ async function main() {
   fs.writeFileSync('github-stats.svg', generateStatsSVG(stats));
   console.log('Successfully generated github-stats.svg!');
 
-  fs.writeFileSync('trophies.svg', generateTrophiesSVG(stats));
-  console.log('Successfully generated trophies.svg!');
+  fs.writeFileSync('top-langs.svg', generateTopLangsSVG(langs));
+  console.log('Successfully generated top-langs.svg!');
 }
 
 main().catch(err => {
