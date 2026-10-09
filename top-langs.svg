@@ -18,7 +18,7 @@
   <g transform="translate(25, 48)">
     <rect width="445" height="8" rx="4" class="bar-bg"/>
     <g clip-path="url(#bar-clip)">
-      <rect x="0" y="0" width="357" height="8" fill="#3178c6"/><rect x="357" y="0" width="34" height="8" fill="#663399"/><rect x="391" y="0" width="31" height="8" fill="#00B4AB"/><rect x="422" y="0" width="10" height="8" fill="#f1e05a"/><rect x="432" y="0" width="10" height="8" fill="#4F5D95"/><rect x="442" y="0" width="4" height="8" fill="#844FBA"/>
+      <rect x="0" y="0" width="140" height="8" fill="#3178c6"/><rect x="140" y="0" width="127" height="8" fill="#f1e05a"/><rect x="267" y="0" width="89" height="8" fill="#663399"/><rect x="356" y="0" width="38" height="8" fill="#384d54"/><rect x="394" y="0" width="25" height="8" fill="#00B4AB"/><rect x="419" y="0" width="26" height="8" fill="#4F5D95"/>
     </g>
   </g>
   <defs>
@@ -30,43 +30,43 @@
     <g transform="translate(25, 78)">
       <circle cx="5" cy="6" r="4.5" fill="#3178c6"/>
       <text x="16" y="9" class="lang-name">TypeScript</text>
-      <text x="206" y="9" text-anchor="end" class="lang-pct">80.1%</text>
+      <text x="206" y="9" text-anchor="end" class="lang-pct">31.4%</text>
       <rect x="16" y="15" width="190" height="4" rx="2" class="bar-bg"/>
-      <rect x="16" y="15" width="152" height="4" rx="2" fill="#3178c6"/>
+      <rect x="16" y="15" width="60" height="4" rx="2" fill="#3178c6"/>
     </g>
     <g transform="translate(260, 78)">
-      <circle cx="5" cy="6" r="4.5" fill="#663399"/>
-      <text x="16" y="9" class="lang-name">CSS</text>
-      <text x="206" y="9" text-anchor="end" class="lang-pct">7.7%</text>
-      <rect x="16" y="15" width="190" height="4" rx="2" class="bar-bg"/>
-      <rect x="16" y="15" width="15" height="4" rx="2" fill="#663399"/>
-    </g>
-    <g transform="translate(25, 112)">
-      <circle cx="5" cy="6" r="4.5" fill="#00B4AB"/>
-      <text x="16" y="9" class="lang-name">Dart</text>
-      <text x="206" y="9" text-anchor="end" class="lang-pct">6.9%</text>
-      <rect x="16" y="15" width="190" height="4" rx="2" class="bar-bg"/>
-      <rect x="16" y="15" width="13" height="4" rx="2" fill="#00B4AB"/>
-    </g>
-    <g transform="translate(260, 112)">
       <circle cx="5" cy="6" r="4.5" fill="#f1e05a"/>
       <text x="16" y="9" class="lang-name">JavaScript</text>
-      <text x="206" y="9" text-anchor="end" class="lang-pct">2.3%</text>
+      <text x="206" y="9" text-anchor="end" class="lang-pct">28.6%</text>
       <rect x="16" y="15" width="190" height="4" rx="2" class="bar-bg"/>
-      <rect x="16" y="15" width="4" height="4" rx="2" fill="#f1e05a"/>
+      <rect x="16" y="15" width="54" height="4" rx="2" fill="#f1e05a"/>
+    </g>
+    <g transform="translate(25, 112)">
+      <circle cx="5" cy="6" r="4.5" fill="#663399"/>
+      <text x="16" y="9" class="lang-name">CSS</text>
+      <text x="206" y="9" text-anchor="end" class="lang-pct">20.0%</text>
+      <rect x="16" y="15" width="190" height="4" rx="2" class="bar-bg"/>
+      <rect x="16" y="15" width="38" height="4" rx="2" fill="#663399"/>
+    </g>
+    <g transform="translate(260, 112)">
+      <circle cx="5" cy="6" r="4.5" fill="#384d54"/>
+      <text x="16" y="9" class="lang-name">Dockerfile</text>
+      <text x="206" y="9" text-anchor="end" class="lang-pct">8.6%</text>
+      <rect x="16" y="15" width="190" height="4" rx="2" class="bar-bg"/>
+      <rect x="16" y="15" width="16" height="4" rx="2" fill="#384d54"/>
     </g>
     <g transform="translate(25, 146)">
-      <circle cx="5" cy="6" r="4.5" fill="#4F5D95"/>
-      <text x="16" y="9" class="lang-name">PHP</text>
-      <text x="206" y="9" text-anchor="end" class="lang-pct">2.1%</text>
+      <circle cx="5" cy="6" r="4.5" fill="#00B4AB"/>
+      <text x="16" y="9" class="lang-name">Dart</text>
+      <text x="206" y="9" text-anchor="end" class="lang-pct">5.7%</text>
       <rect x="16" y="15" width="190" height="4" rx="2" class="bar-bg"/>
-      <rect x="16" y="15" width="4" height="4" rx="2" fill="#4F5D95"/>
+      <rect x="16" y="15" width="11" height="4" rx="2" fill="#00B4AB"/>
     </g>
     <g transform="translate(260, 146)">
-      <circle cx="5" cy="6" r="4.5" fill="#844FBA"/>
-      <text x="16" y="9" class="lang-name">HCL</text>
-      <text x="206" y="9" text-anchor="end" class="lang-pct">0.4%</text>
+      <circle cx="5" cy="6" r="4.5" fill="#4F5D95"/>
+      <text x="16" y="9" class="lang-name">PHP</text>
+      <text x="206" y="9" text-anchor="end" class="lang-pct">5.7%</text>
       <rect x="16" y="15" width="190" height="4" rx="2" class="bar-bg"/>
-      <rect x="16" y="15" width="3" height="4" rx="2" fill="#844FBA"/>
+      <rect x="16" y="15" width="11" height="4" rx="2" fill="#4F5D95"/>
     </g>
 </svg>

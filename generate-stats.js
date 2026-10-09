@@ -436,47 +436,52 @@ async function getTopLanguages() {
     const repos = data.user.repositories.nodes || [];
 
     const langMap = new Map();
-    let totalBytes = 0;
 
     for (const repo of repos) {
       if (!repo.languages || !repo.languages.edges) continue;
       for (const edge of repo.languages.edges) {
         const size = edge.size;
         const { name, color } = edge.node;
-        totalBytes += size;
 
         if (langMap.has(name)) {
           const item = langMap.get(name);
+          item.repos += 1;
           item.size += size;
         } else {
-          langMap.set(name, { name, color: color || '#8b949e', size });
+          langMap.set(name, { name, color: color || '#8b949e', repos: 1, size });
         }
       }
     }
 
-    if (totalBytes === 0) {
+    const sortedLangs = Array.from(langMap.values())
+      .sort((a, b) => b.repos - a.repos || b.size - a.size)
+      .slice(0, 6);
+
+    const totalOccurrences = sortedLangs.reduce((sum, item) => sum + item.repos, 0);
+
+    if (totalOccurrences === 0) {
       return [
-        { name: 'TypeScript', color: '#3178c6', percentage: 65.0 },
-        { name: 'JavaScript', color: '#f1e05a', percentage: 25.0 },
-        { name: 'HTML', color: '#e34c26', percentage: 6.0 },
-        { name: 'CSS', color: '#563d7c', percentage: 4.0 },
+        { name: 'TypeScript', color: '#3178c6', percentage: 31.4 },
+        { name: 'JavaScript', color: '#f1e05a', percentage: 28.6 },
+        { name: 'CSS', color: '#663399', percentage: 20.0 },
+        { name: 'Dockerfile', color: '#384d54', percentage: 8.6 },
+        { name: 'Dart', color: '#00B4AB', percentage: 5.7 },
+        { name: 'PHP', color: '#4F5D95', percentage: 5.7 },
       ];
     }
 
-    return Array.from(langMap.values())
-      .sort((a, b) => b.size - a.size)
-      .slice(0, 6)
-      .map(item => ({
-        ...item,
-        percentage: (item.size / totalBytes) * 100,
-      }));
+    return sortedLangs.map(item => ({
+      ...item,
+      percentage: (item.repos / totalOccurrences) * 100,
+    }));
   } catch (err) {
     return [
-      { name: 'TypeScript', color: '#3178c6', percentage: 68.2 },
-      { name: 'JavaScript', color: '#f1e05a', percentage: 22.4 },
-      { name: 'HTML', color: '#e34c26', percentage: 5.1 },
-      { name: 'CSS', color: '#563d7c', percentage: 3.2 },
-      { name: 'Shell', color: '#89e051', percentage: 1.1 },
+      { name: 'TypeScript', color: '#3178c6', percentage: 31.4 },
+      { name: 'JavaScript', color: '#f1e05a', percentage: 28.6 },
+      { name: 'CSS', color: '#663399', percentage: 20.0 },
+      { name: 'Dockerfile', color: '#384d54', percentage: 8.6 },
+      { name: 'Dart', color: '#00B4AB', percentage: 5.7 },
+      { name: 'PHP', color: '#4F5D95', percentage: 5.7 },
     ];
   }
 }
