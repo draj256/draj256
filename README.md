@@ -19,7 +19,7 @@ I build digital products, software, and tools that help ideas move forward.
 
 ## About
 
-I'm the founder of **[Hoslift](https://hoslift.com)**, a digital solutions studio, and a full-stack developer interested in building useful, dependable software.
+I'm the founder of **[Hoslift](https://hoslift.com)**, a digital solutions, and a full-stack developer interested in building useful, dependable software.
 
 My work spans web development, digital products, cloud infrastructure, and open source. I enjoy turning ideas into practical systems and improving them through thoughtful engineering.
 
@@ -61,11 +61,6 @@ I'm building Ranu.js with an emphasis on a cohesive developer experience, practi
 
 <div align="center">
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://github-stats-extended.vercel.app/api?username=draj256&show_icons=true&hide_border=true&include_all_commits=true&title_color=93C5FD&icon_color=60A5FA&text_color=C9D1D9&bg_color=071A2B">
-  <source media="(prefers-color-scheme: light)" srcset="https://github-stats-extended.vercel.app/api?username=draj256&show_icons=true&hide_border=true&include_all_commits=true&title_color=1D4ED8&icon_color=2563EB&text_color=334155&bg_color=FFFFFF">
-  <img src="https://github-stats-extended.vercel.app/api?username=draj256&show_icons=true&hide_border=true&include_all_commits=true&title_color=93C5FD&icon_color=60A5FA&text_color=C9D1D9&bg_color=071A2B" width="100%" alt="GitHub statistics for draj256">
-</picture>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=draj256&theme=github_dark">
@@ -73,11 +68,7 @@ I'm building Ranu.js with an emphasis on a cohesive developer experience, practi
   <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=draj256&theme=github_dark" width="100%" alt="GitHub contribution and activity summary">
 </picture>
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com/?user=draj256&background=071A2B&border=071A2B&stroke=2563EB&ring=60A5FA&fire=60A5FA&currStreakLabel=93C5FD&sideNums=E2E8F0&currStreakNum=FFFFFF&sideLabels=C9D1D9&dates=94A3B8">
-  <source media="(prefers-color-scheme: light)" srcset="https://streak-stats.demolab.com/?user=draj256&background=FFFFFF&border=E2E8F0&stroke=2563EB&ring=2563EB&fire=2563EB&currStreakLabel=1D4ED8&sideNums=0F172A&currStreakNum=0F172A&sideLabels=334155&dates=64748B">
-  <img src="https://streak-stats.demolab.com/?user=draj256&background=071A2B&border=071A2B&stroke=2563EB&ring=60A5FA&fire=60A5FA&currStreakLabel=93C5FD&sideNums=E2E8F0&currStreakNum=FFFFFF&sideLabels=C9D1D9&dates=94A3B8" width="100%" alt="GitHub contribution streak">
-</picture>
+
 
 </div>
 
