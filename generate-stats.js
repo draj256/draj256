@@ -554,7 +554,7 @@ function generateStreakSVG(stats) {
   <style>
     @keyframes currstreak { 0% { font-size: 3px; opacity: 0.2; } 80% { font-size: 34px; opacity: 1; } 100% { font-size: 28px; opacity: 1; } }
     @keyframes fadein { 0% { opacity: 0; } 100% { opacity: 1; } }
-    .bg { fill: #0d1117; stroke: #0d1117; }
+    .bg { fill: #0d1117; stroke: #30363d; stroke-width: 1; }
     .divider { stroke: #40c463; stroke-width: 1; }
     .num-main { fill: #ffffff; }
     .label-main { fill: #ffffff; }
@@ -563,7 +563,7 @@ function generateStreakSVG(stats) {
     .streak-fire { fill: #40c463; }
     .streak-label { fill: #40c463; }
     @media (prefers-color-scheme: light) {
-      .bg { fill: #ffffff; stroke: #e1e4e8; }
+      .bg { fill: #ffffff; stroke: #e1e4e8; stroke-width: 1; }
       .divider { stroke: #238636; }
       .num-main { fill: #24292e; }
       .label-main { fill: #24292e; }
