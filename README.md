@@ -52,13 +52,16 @@ I'm building Ranu.js with an emphasis on a cohesive developer experience, practi
 <br />
 
 <a href="https://github.com/hoslift/ranu.js" target="_blank">
-  <img src="https://img.shields.io/badge/Explore%20Ranu.js-238636?style=for-the-badge&logo=github&logoColor=white" alt="Explore Ranu.js" />
-</a>
-<a href="https://github.com/hoslift/ranu.js" target="_blank">
-  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Explore%20Ranu.js-33BBCA?style=for-the-badge&logo=github&logoColor=white" alt="Explore Ranu.js" />
 </a>
 
+
 ---
+<!-- Row 1: Overall Stats & Streak -->
+<p align="center">
+  <img src="./github-stats.svg" width="49%" alt="GitHub Stats" />
+  <img src="./github-streak.svg" width="49%" alt="GitHub Streak" />
+</p>
 
 ---
 
@@ -78,11 +81,7 @@ I'm building Ranu.js with an emphasis on a cohesive developer experience, practi
 
 ## 📊 GitHub Analytics & Activity Suite
 
-<!-- Row 1: Overall Stats & Streak -->
-<p align="center">
-  <img src="./github-stats.svg" width="49%" alt="GitHub Stats" />
-  <img src="./github-streak.svg" width="49%" alt="GitHub Streak" />
-</p>
+
 
 <!-- Row 2: Profile Details & Recent Activity -->
 <p align="center">
