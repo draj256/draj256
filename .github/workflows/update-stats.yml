@@ -2,8 +2,8 @@ name: Update GitHub Stats SVG
 
 on:
   schedule:
-    - cron: '0 0 * * *' # දිනපතා ක්‍රියාත්මක වේ
-  workflow_dispatch: # අවශ්‍ය ඕනෑම වේලාවක Run button එක ඔබා ක්‍රියාත්මක කළ හැක
+    - cron: '0 0 * * *'
+  workflow_dispatch:   
 
 jobs:
   build:
@@ -30,4 +30,4 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add github-stats.svg
-          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: update github-stats.svg [skip ci]" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: update streak stats svg [skip ci]" && git push)
