@@ -89,7 +89,7 @@
     <!-- Right Column: Streak Stats (Green Accent & Streak) -->
     <td width="50%" align="center" valign="middle">
       <picture>
-        <img src="./github-streak.svg" width="100%" alt="GitHub Streak" />
+        <img src="./loc-stats.svg" width="100%" alt="Lines of Code & Contribution Breakdown" />
       </picture>
     </td>
   </tr>
