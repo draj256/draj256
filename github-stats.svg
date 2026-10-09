@@ -1,0 +1,46 @@
+<svg width="495" height="195" viewBox="0 0 495 195" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .bg { fill: #0d1117; stroke: #30363d; }
+    .title { font: 600 18px 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif; fill: #ffffff; }
+    .label { font: 400 13px 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif; fill: #8b949e; }
+    .stat { font: 700 14px 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif; fill: #ffffff; }
+    .icon { fill: #ffffff; }
+
+    @media (prefers-color-scheme: light) {
+      .bg { fill: #ffffff; stroke: #e1e4e8; }
+      .title { fill: #000000; }
+      .label { fill: #586069; }
+      .stat { fill: #000000; }
+      .icon { fill: #000000; }
+    }
+  </style>
+
+  <rect class="bg" x="0.5" y="0.5" width="494" height="194" rx="10" stroke-width="1"/>
+  
+  <!-- Title -->
+  <text x="30" y="38" class="title">draj256's GitHub Stats</text>
+
+  <!-- Total Commits (Public + Private) -->
+  <g transform="translate(30, 60)">
+    <text x="0" y="15" class="label">Total Commits (Public + Private):</text>
+    <text x="430" y="15" text-anchor="end" class="stat">2,419</text>
+  </g>
+
+  <!-- Total Pull Requests -->
+  <g transform="translate(30, 90)">
+    <text x="0" y="15" class="label">Total PRs:</text>
+    <text x="430" y="15" text-anchor="end" class="stat">141</text>
+  </g>
+
+  <!-- Total Issues -->
+  <g transform="translate(30, 120)">
+    <text x="0" y="15" class="label">Total Issues:</text>
+    <text x="430" y="15" text-anchor="end" class="stat">67</text>
+  </g>
+
+  <!-- Total Stars Earned -->
+  <g transform="translate(30, 150)">
+    <text x="0" y="15" class="label">Total Stars Earned:</text>
+    <text x="430" y="15" text-anchor="end" class="stat">4</text>
+  </g>
+</svg>
