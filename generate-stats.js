@@ -437,3 +437,98 @@ main().catch(err => {
   console.error(err);
   process.exit(1);
 });
+
+// Productive Hours & Commit Habits SVG Generator
+function generateHabitsSVG(habits) {
+  const { morning, daytime, evening, night, dayCounts, peakDay, peakTime } = habits;
+  const total = morning + daytime + evening + night || 1;
+  const mPct = Math.round((morning / total) * 100);
+  const dPct = Math.round((daytime / total) * 100);
+  const ePct = Math.round((evening / total) * 100);
+  const nPct = Math.round((night / total) * 100);
+
+  const barMaxW = 100;
+  const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  const maxDayVal = Math.max(...Object.values(dayCounts), 1);
+
+  const dayBarsSVG = days.map((day, idx) => {
+    const val = dayCounts[day] || 0;
+    const barH = Math.max(4, Math.round((val / maxDayVal) * 55));
+    const x = 285 + idx * 26;
+    const y = 125 - barH;
+    return `
+      <g>
+        <rect x="${x}" y="${y}" width="14" height="${barH}" rx="3" class="bar-fill"/>
+        <text x="${x + 7}" y="142" text-anchor="middle" class="chart-label">${day[0]}</text>
+      </g>
+    `;
+  }).join('');
+
+  return `<svg width="495" height="195" viewBox="0 0 495 195" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .bg { fill: #0d1117; stroke: #30363d; }
+    .header { font: 600 16px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #40c463; }
+    .label { font: 400 12px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #8b949e; }
+    .val { font: 600 12px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #ffffff; }
+    .bar-bg { fill: #21262d; rx: 3; }
+    .bar-fill { fill: #40c463; }
+    .divider { stroke: #30363d; stroke-width: 1; }
+    .chart-label { font: 400 10.5px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #8b949e; }
+    .badge { font: 600 11px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #40c463; }
+
+    @media (prefers-color-scheme: light) {
+      .bg { fill: #ffffff; stroke: #e1e4e8; }
+      .header { fill: #238636; }
+      .label { fill: #586069; }
+      .val { fill: #24292e; }
+      .bar-bg { fill: #eaecef; }
+      .bar-fill { fill: #238636; }
+      .divider { stroke: #e1e4e8; }
+      .chart-label { fill: #586069; }
+      .badge { fill: #238636; }
+    }
+  </style>
+
+  <rect class="bg" x="0.5" y="0.5" width="494" height="194" rx="4.5" stroke-width="1"/>
+  <text x="25" y="34" class="header">⏰ Productive Hours &amp; Commit Habits</text>
+
+  <!-- Left: Time of Day Bars -->
+  <g transform="translate(25, 52)">
+    <text x="0" y="11" class="label">🌅 Morning (06-12h)</text>
+    <rect x="130" y="2" width="${barMaxW}" height="10" class="bar-bg"/>
+    <rect x="130" y="2" width="${Math.round((mPct / 100) * barMaxW)}" height="10" rx="3" class="bar-fill"/>
+    <text x="240" y="11" class="val">${mPct}%</text>
+  </g>
+
+  <g transform="translate(25, 78)">
+    <text x="0" y="11" class="label">☀️ Daytime (12-18h)</text>
+    <rect x="130" y="2" width="${barMaxW}" height="10" class="bar-bg"/>
+    <rect x="130" y="2" width="${Math.round((dPct / 100) * barMaxW)}" height="10" rx="3" class="bar-fill"/>
+    <text x="240" y="11" class="val">${dPct}%</text>
+  </g>
+
+  <g transform="translate(25, 104)">
+    <text x="0" y="11" class="label">🌇 Evening (18-24h)</text>
+    <rect x="130" y="2" width="${barMaxW}" height="10" class="bar-bg"/>
+    <rect x="130" y="2" width="${Math.round((ePct / 100) * barMaxW)}" height="10" rx="3" class="bar-fill"/>
+    <text x="240" y="11" class="val">${ePct}%</text>
+  </g>
+
+  <g transform="translate(25, 130)">
+    <text x="0" y="11" class="label">🌙 Night (00-06h)</text>
+    <rect x="130" y="2" width="${barMaxW}" height="10" class="bar-bg"/>
+    <rect x="130" y="2" width="${Math.round((nPct / 100) * barMaxW)}" height="10" rx="3" class="bar-fill"/>
+    <text x="240" y="11" class="val">${nPct}%</text>
+  </g>
+
+  <line class="divider" x1="268" y1="46" x2="268" y2="168"/>
+
+  <!-- Right: Day of Week Bars -->
+  <text x="285" y="58" class="chart-label">Day of Week Activity</text>
+  ${dayBarsSVG}
+
+  <g transform="translate(285, 166)">
+    <text x="0" y="0" class="badge">⚡ Peak: ${peakDay} (${peakTime})</text>
+  </g>
+</svg>`;
+}
