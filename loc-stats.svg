@@ -1,0 +1,69 @@
+<svg width="495" height="195" viewBox="0 0 495 195" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .bg { fill: #0d1117; stroke: #30363d; }
+    .header { font: 600 16px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #40c463; }
+    .label { font: 400 11.5px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #8b949e; }
+    .val { font: 600 12px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #ffffff; }
+    .num-add { font: 700 18px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #3fb950; }
+    .num-del { font: 700 18px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #f85149; }
+    .num-tot { font: 700 18px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #ffffff; }
+    .sub { font: 400 11px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #8b949e; }
+    .divider { stroke: #30363d; stroke-width: 1; }
+
+    @media (prefers-color-scheme: light) {
+      .bg { fill: #ffffff; stroke: #e1e4e8; }
+      .header { fill: #238636; }
+      .label { fill: #586069; }
+      .val { fill: #24292e; }
+      .num-add { fill: #238636; }
+      .num-del { fill: #cf222e; }
+      .num-tot { fill: #24292e; }
+      .sub { fill: #586069; }
+      .divider { stroke: #e1e4e8; }
+    }
+  </style>
+
+  <rect class="bg" x="0.5" y="0.5" width="494" height="194" rx="4.5" stroke-width="1"/>
+  <text x="25" y="34" class="header">📈 Lines of Code &amp; Contribution Breakdown</text>
+
+  <!-- Multi-segment Progress Bar -->
+  <g transform="translate(25, 48)">
+    <rect x="0" y="0" width="391" height="10" rx="3" fill="#40c463"/>
+    <rect x="391" y="0" width="31" height="10" fill="#58a6ff"/>
+    <rect x="422" y="0" width="13" height="10" fill="#d29922"/>
+    <rect x="435" y="0" width="9" height="10" rx="3" fill="#bc8cff"/>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(25, 74)">
+    <circle cx="5" cy="5" r="4" fill="#40c463"/>
+    <text x="14" y="9" class="label">Commits: <tspan class="val">1,755</tspan> (88%)</text>
+
+    <circle cx="150" cy="5" r="4" fill="#58a6ff"/>
+    <text x="159" y="9" class="label">PRs: <tspan class="val">141</tspan> (7%)</text>
+
+    <circle cx="255" cy="5" r="4" fill="#d29922"/>
+    <text x="264" y="9" class="label">Issues: <tspan class="val">67</tspan> (3%)</text>
+
+    <circle cx="360" cy="5" r="4" fill="#bc8cff"/>
+    <text x="369" y="9" class="label">Reviews: <tspan class="val">35</tspan> (2%)</text>
+  </g>
+
+  <line class="divider" x1="25" y1="96" x2="470" y2="96"/>
+
+  <!-- LOC Stats: 3 Columns -->
+  <g transform="translate(25, 115)">
+    <text x="0" y="20" class="num-add">+107.2k</text>
+    <text x="0" y="42" class="sub">Lines Added</text>
+  </g>
+
+  <g transform="translate(185, 115)">
+    <text x="0" y="20" class="num-del">-2.8k</text>
+    <text x="0" y="42" class="sub">Lines Deleted</text>
+  </g>
+
+  <g transform="translate(335, 115)">
+    <text x="0" y="20" class="num-tot">109.9k</text>
+    <text x="0" y="42" class="sub">Total Lines Modified</text>
+  </g>
+</svg>

@@ -26,7 +26,6 @@
   <rect class="bg" x="0.5" y="0.5" width="494" height="194" rx="4.5" stroke-width="1"/>
   <text x="25" y="34" class="header">⏰ Productive Hours &amp; Commit Habits</text>
 
-  <!-- Left: Time of Day Bars -->
   <g transform="translate(25, 52)">
     <text x="0" y="11" class="label">🌅 Morning (06-12h)</text>
     <rect x="130" y="2" width="100" height="10" class="bar-bg"/>
@@ -37,15 +36,15 @@
   <g transform="translate(25, 78)">
     <text x="0" y="11" class="label">☀️ Daytime (12-18h)</text>
     <rect x="130" y="2" width="100" height="10" class="bar-bg"/>
-    <rect x="130" y="2" width="30" height="10" rx="3" class="bar-fill"/>
-    <text x="240" y="11" class="val">30%</text>
+    <rect x="130" y="2" width="32" height="10" rx="3" class="bar-fill"/>
+    <text x="240" y="11" class="val">32%</text>
   </g>
 
   <g transform="translate(25, 104)">
     <text x="0" y="11" class="label">🌇 Evening (18-24h)</text>
     <rect x="130" y="2" width="100" height="10" class="bar-bg"/>
-    <rect x="130" y="2" width="41" height="10" rx="3" class="bar-fill"/>
-    <text x="240" y="11" class="val">41%</text>
+    <rect x="130" y="2" width="39" height="10" rx="3" class="bar-fill"/>
+    <text x="240" y="11" class="val">39%</text>
   </g>
 
   <g transform="translate(25, 130)">
@@ -57,7 +56,6 @@
 
   <line class="divider" x1="268" y1="46" x2="268" y2="168"/>
 
-  <!-- Right: Day of Week Bars -->
   <text x="285" y="58" class="chart-label">Day of Week Activity</text>
   
       <g>
@@ -71,7 +69,7 @@
       </g>
     
       <g>
-        <rect x="337" y="93" width="14" height="32" rx="3" class="bar-fill"/>
+        <rect x="337" y="96" width="14" height="29" rx="3" class="bar-fill"/>
         <text x="344" y="142" text-anchor="middle" class="chart-label">W</text>
       </g>
     
