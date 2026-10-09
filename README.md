@@ -60,6 +60,8 @@ I'm building Ranu.js with an emphasis on a cohesive developer experience, practi
 
 ---
 
+---
+
 ## 🛠️ Tech Stack & Skills
 
 <p align="center">
@@ -76,44 +78,29 @@ I'm building Ranu.js with an emphasis on a cohesive developer experience, practi
 
 ## 📊 GitHub Analytics & Activity Suite
 
-<table width="100%">
-  <!-- Row 1: Overall Stats & Streak (Core Highlights) -->
-  <tr>
-    <td width="50%" align="center" valign="middle">
-      <img src="./github-stats.svg" width="100%" alt="GitHub Stats" />
-    </td>
-    <td width="50%" align="center" valign="middle">
-      <img src="./github-streak.svg" width="100%" alt="GitHub Streak" />
-    </td>
-  </tr>
-  <!-- Row 2: Profile Details Curve & Recent Activity Timeline -->
-  <tr>
-    <td width="50%" align="center" valign="middle">
-      <img src="./profile-details.svg" width="100%" alt="Profile Details" />
-    </td>
-    <td width="50%" align="center" valign="middle">
-      <img src="./recent-activity.svg" width="100%" alt="Recent Activity" />
-    </td>
-  </tr>
-  <!-- Row 3: Productive Habits & Lines of Code Breakdown -->
-  <tr>
-    <td width="50%" align="center" valign="middle">
-      <img src="./productive-hours.svg" width="100%" alt="Productive Hours" />
-    </td>
-    <td width="50%" align="center" valign="middle">
-      <img src="./loc-stats.svg" width="100%" alt="Lines of Code" />
-    </td>
-  </tr>
-  <!-- Row 4: Top Languages & Achievements/Trophies -->
-  <tr>
-    <td width="50%" align="center" valign="middle">
-      <img src="./top-langs.svg" width="100%" alt="Top Languages" />
-    </td>
-    <td width="50%" align="center" valign="middle">
-      <img src="./trophies.svg" width="100%" alt="GitHub Trophies" />
-    </td>
-  </tr>
-</table>
+<!-- Row 1: Overall Stats & Streak -->
+<p align="center">
+  <img src="./github-stats.svg" width="49%" alt="GitHub Stats" />
+  <img src="./github-streak.svg" width="49%" alt="GitHub Streak" />
+</p>
+
+<!-- Row 2: Profile Details & Recent Activity -->
+<p align="center">
+  <img src="./profile-details.svg" width="49%" alt="Profile Details" />
+  <img src="./recent-activity.svg" width="49%" alt="Recent Activity" />
+</p>
+
+<!-- Row 3: Productive Hours & Lines of Code -->
+<p align="center">
+  <img src="./productive-hours.svg" width="49%" alt="Productive Hours" />
+  <img src="./loc-stats.svg" width="49%" alt="Lines of Code" />
+</p>
+
+<!-- Row 4: Top Languages & Achievements -->
+<p align="center">
+  <img src="./top-langs.svg" width="49%" alt="Top Languages" />
+  <img src="./trophies.svg" width="49%" alt="GitHub Trophies" />
+</p>
 
 ---
 
