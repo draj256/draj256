@@ -1,0 +1,79 @@
+<svg width="495" height="195" viewBox="0 0 495 195" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .bg { fill: #0d1117; stroke: #30363d; }
+    .header { font: 600 16px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #40c463; }
+    .lang-name { font: 600 12px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #ffffff; }
+    .lang-pct { font: 400 11.5px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #8b949e; }
+    .bar-bg { fill: #21262d; }
+
+    @media (prefers-color-scheme: light) {
+      .bg { fill: #ffffff; stroke: #e1e4e8; }
+      .header { fill: #238636; }
+      .lang-name { fill: #24292e; }
+      .lang-pct { fill: #586069; }
+      .bar-bg { fill: #eaecef; }
+    }
+  </style>
+
+  <rect class="bg" x="0.5" y="0.5" width="494" height="194" rx="4.5" stroke-width="1"/>
+  <text x="25" y="34" class="header">💻 Most Used Languages</text>
+
+  <!-- Continuous Multi-Language Progress Bar -->
+  <g transform="translate(25, 48)">
+    <rect width="445" height="8" rx="4" class="bar-bg"/>
+    <g clip-path="url(#bar-clip)">
+      <rect x="0" y="0" width="358" height="8" fill="#3178c6"/><rect x="358" y="0" width="34" height="8" fill="#663399"/><rect x="392" y="0" width="31" height="8" fill="#00B4AB"/><rect x="423" y="0" width="10" height="8" fill="#4F5D95"/><rect x="433" y="0" width="9" height="8" fill="#f1e05a"/><rect x="442" y="0" width="4" height="8" fill="#844FBA"/>
+    </g>
+  </g>
+
+  <defs>
+    <clipPath id="bar-clip">
+      <rect width="445" height="8" rx="4"/>
+    </clipPath>
+  </defs>
+
+  <!-- Languages 2-column Grid -->
+  
+    <g transform="translate(25, 78)">
+      <circle cx="5" cy="6" r="4.5" fill="#3178c6"/>
+      <text x="16" y="9" class="lang-name">TypeScript</text>
+      <text x="206" y="9" text-anchor="end" class="lang-pct">80.4%</text>
+      <rect x="16" y="15" width="190" height="4" rx="2" class="bar-bg"/>
+      <rect x="16" y="15" width="153" height="4" rx="2" fill="#3178c6"/>
+    </g>
+    <g transform="translate(260, 78)">
+      <circle cx="5" cy="6" r="4.5" fill="#663399"/>
+      <text x="16" y="9" class="lang-name">CSS</text>
+      <text x="206" y="9" text-anchor="end" class="lang-pct">7.7%</text>
+      <rect x="16" y="15" width="190" height="4" rx="2" class="bar-bg"/>
+      <rect x="16" y="15" width="15" height="4" rx="2" fill="#663399"/>
+    </g>
+    <g transform="translate(25, 112)">
+      <circle cx="5" cy="6" r="4.5" fill="#00B4AB"/>
+      <text x="16" y="9" class="lang-name">Dart</text>
+      <text x="206" y="9" text-anchor="end" class="lang-pct">6.9%</text>
+      <rect x="16" y="15" width="190" height="4" rx="2" class="bar-bg"/>
+      <rect x="16" y="15" width="13" height="4" rx="2" fill="#00B4AB"/>
+    </g>
+    <g transform="translate(260, 112)">
+      <circle cx="5" cy="6" r="4.5" fill="#4F5D95"/>
+      <text x="16" y="9" class="lang-name">PHP</text>
+      <text x="206" y="9" text-anchor="end" class="lang-pct">2.2%</text>
+      <rect x="16" y="15" width="190" height="4" rx="2" class="bar-bg"/>
+      <rect x="16" y="15" width="4" height="4" rx="2" fill="#4F5D95"/>
+    </g>
+    <g transform="translate(25, 146)">
+      <circle cx="5" cy="6" r="4.5" fill="#f1e05a"/>
+      <text x="16" y="9" class="lang-name">JavaScript</text>
+      <text x="206" y="9" text-anchor="end" class="lang-pct">2.0%</text>
+      <rect x="16" y="15" width="190" height="4" rx="2" class="bar-bg"/>
+      <rect x="16" y="15" width="4" height="4" rx="2" fill="#f1e05a"/>
+    </g>
+    <g transform="translate(260, 146)">
+      <circle cx="5" cy="6" r="4.5" fill="#844FBA"/>
+      <text x="16" y="9" class="lang-name">HCL</text>
+      <text x="206" y="9" text-anchor="end" class="lang-pct">0.4%</text>
+      <rect x="16" y="15" width="190" height="4" rx="2" class="bar-bg"/>
+      <rect x="16" y="15" width="3" height="4" rx="2" fill="#844FBA"/>
+    </g>
+</svg>
