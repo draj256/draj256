@@ -1,79 +1,89 @@
 <div align="center">
 
-# Darshana Rajapaksha
+# 👋 Hey Everyone, I'm Darshana Rajapaksha
+### 🚀 Founder of Hoslift | Full-Stack Developer | Creator of Ranu.js
 
-### Founder · Full-Stack Developer · Open-Source Creator
-
-I build digital products, software, and tools that help ideas move forward.
-
-[![Website](https://img.shields.io/badge/Website-hoslift.com-2563EB?style=flat-square&logo=googlechrome&logoColor=white)](https://hoslift.com)
-[![GitHub](https://img.shields.io/badge/GitHub-draj256-071A2B?style=flat-square&logo=github&logoColor=white)](https://github.com/draj256)
-[![Ranu.js](https://img.shields.io/badge/Building-Ranu.js-2563EB?style=flat-square&logo=typescript&logoColor=white)](https://github.com/hoslift/ranu.js)
-[![Email](https://img.shields.io/badge/Contact-darshana%40hoslift.com-071A2B?style=flat-square&logo=gmail&logoColor=white)](mailto:darshana@hoslift.com)
-
-![Profile Views](https://komarev.com/ghpvc/?username=draj256&label=Profile%20Views&color=2563EB&style=flat-square)
-
-</div>
-
----
-
-## About
-
-I'm the founder of **[Hoslift](https://hoslift.com)**, a digital solutions, and a full-stack developer interested in building useful, dependable software.
-
-My work spans web development, digital products, cloud infrastructure, and open source. I enjoy turning ideas into practical systems and improving them through thoughtful engineering.
-
-- **Based in:** Sri Lanka
-- **Building:** Digital experiences and software at Hoslift
-- **Open source:** Creator of [Ranu.js](https://github.com/hoslift/ranu.js)
-- **Contact:** [darshana@hoslift.com](mailto:darshana@hoslift.com)
-
-## Focus Areas
-
-- **Digital products** — websites, web applications, and tailored software solutions
-- **Full-stack development** — building across frontend and backend systems
-- **Open source** — developing tools and frameworks for the wider developer community
-- **Cloud and infrastructure** — deployment, hosting, and the systems that keep products running
-
-## Featured Project
-
-### [Ranu.js](https://github.com/hoslift/ranu.js)
-
-A TypeScript-focused, full-stack framework project developed under Hoslift.
-
-I'm building Ranu.js with an emphasis on a cohesive developer experience, practical full-stack workflows, and a growing open-source ecosystem.
-
-[![Explore Ranu.js](https://img.shields.io/badge/Explore%20the%20project-2563EB?style=for-the-badge&logo=github&logoColor=white)](https://github.com/hoslift/ranu.js)
-
-## Tech Stack
-
-<p>
-  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-2563EB?style=flat-square&logo=typescript&logoColor=white" />
-  <img alt="JavaScript" src="https://img.shields.io/badge/JavaScript-071A2B?style=flat-square&logo=javascript&logoColor=white" />
-  <img alt="React" src="https://img.shields.io/badge/React-2563EB?style=flat-square&logo=react&logoColor=white" />
-  <img alt="Node.js" src="https://img.shields.io/badge/Node.js-071A2B?style=flat-square&logo=nodedotjs&logoColor=white" />
-  <img alt="Git" src="https://img.shields.io/badge/Git-2563EB?style=flat-square&logo=git&logoColor=white" />
-  <img alt="Docker" src="https://img.shields.io/badge/Docker-071A2B?style=flat-square&logo=docker&logoColor=white" />
-  <img alt="Linux" src="https://img.shields.io/badge/Linux-2563EB?style=flat-square&logo=linux&logoColor=white" />
+<!-- Visitor Views (Green) -->
+<p align="center">
+  <img src="https://komarev.com/ghpvc/?username=draj256&label=Profile%20Views&color=2ea043&style=flat-square" alt="Profile Views" />
 </p>
 
-## GitHub Activity
-
-<div align="center">
-
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=draj256&theme=github_dark">
-  <source media="(prefers-color-scheme: light)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=draj256&theme=github">
-  <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=draj256&theme=github_dark" width="100%" alt="GitHub contribution and activity summary">
-</picture>
-
-
+<!-- Social Links (Unified GitHub Green Theme) -->
+<p align="center">
+  <a href="https://hoslift.com" target="_blank"><img src="https://img.shields.io/badge/Website-hoslift.com-238636?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Website" /></a>
+  <a href="mailto:darshana@hoslift.com"><img src="https://img.shields.io/badge/Email-darshana%40hoslift.com-238636?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" /></a>
+  <a href="https://github.com/hoslift/ranu.js" target="_blank"><img src="https://img.shields.io/badge/Project-Ranu.js-238636?style=for-the-badge&logo=javascript&logoColor=white" alt="Ranu.js" /></a>
+</p>
 
 </div>
 
 ---
 
-<div align="center">
-  <sub>Designing, building, and learning — one iteration at a time.</sub>
-</div>
+### 👨‍💻 About Me
+
+<table width="100%">
+  <tr>
+    <!-- Left Column: About Info -->
+    <td width="50%" valign="middle">
+      <ul>
+        <li>🏢 <b>Founder</b> at <a href="https://hoslift.com">Hoslift</a>.</li>
+        <li>🛠️ <b>Full-Stack Developer</b> passionate about modern web tech.</li>
+        <li>⚡ Creator of <b><a href="https://github.com/hoslift/ranu.js">Ranu.js</a></b> — high-performance tooling.</li>
+        <li>🌍 Based in <b>Sri Lanka</b> 🇱🇰.</li>
+        <li>📫 Let's connect: <b>darshana@hoslift.com</b></li>
+      </ul>
+    </td>
+    <!-- Right Column: Live GitHub Stats Card (Green Primary Accent) -->
+    <td width="50%" align="center" valign="middle">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://github-stats-extended.vercel.app/api?username=draj256&show_icons=true&hide_border=true&title_color=40c463&icon_color=40c463&text_color=ffffff&bg_color=0d1117">
+        <source media="(prefers-color-scheme: light)" srcset="https://github-stats-extended.vercel.app/api?username=draj256&show_icons=true&hide_border=true&title_color=238636&icon_color=238636&text_color=24292e&bg_color=ffffff">
+        <img src="https://github-stats-extended.vercel.app/api?username=draj256&show_icons=true&hide_border=true&title_color=40c463&icon_color=40c463&text_color=ffffff&bg_color=0d1117" width="100%" alt="GitHub Stats" />
+      </picture>
+    </td>
+  </tr>
+</table>
+
+---
+
+### 🛠️ Tech Stack & Skills
+
+<p align="center">
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" />
+  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" />
+  <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black" />
+  <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" />
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
+  <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" />
+</p>
+
+---
+
+### 📊 GitHub Activity & Statistics
+
+<table width="100%">
+  <tr>
+    <!-- Left Column: Profile Details & Activity Graph (Green Accent) -->
+    <td width="50%" align="center" valign="middle">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=draj256&theme=github_dark">
+        <source media="(prefers-color-scheme: light)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=draj256&theme=github">
+        <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=draj256&theme=github_dark" width="100%" alt="Profile Details" />
+      </picture>
+    </td>
+    <!-- Right Column: Streak Stats (Green Accent) -->
+    <td width="50%" align="center" valign="middle">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com/?user=draj256&background=0d1117&border=0d1117&stroke=40c463&ring=40c463&fire=40c463&currStreakLabel=40c463&sideNums=ffffff&currStreakNum=ffffff&sideLabels=ffffff&dates=8b949e">
+        <source media="(prefers-color-scheme: light)" srcset="https://streak-stats.demolab.com/?user=draj256&background=ffffff&border=e1e4e8&stroke=238636&ring=238636&fire=238636&currStreakLabel=238636&sideNums=24292e&currStreakNum=24292e&sideLabels=24292e&dates=586069">
+        <img src="https://streak-stats.demolab.com/?user=draj256&background=0d1117&border=0d1117&stroke=40c463&ring=40c463&fire=40c463&currStreakLabel=40c463&sideNums=ffffff&currStreakNum=ffffff&sideLabels=ffffff&dates=8b949e" width="100%" alt="GitHub Streak" />
+      </picture>
+    </td>
+  </tr>
+</table>
+
+---
+
+
+<!-- GitHub Profile by draj256 -->
