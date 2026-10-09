@@ -47,6 +47,7 @@ async function getAllStats() {
         pullRequests { totalCount }
         issues { totalCount }
         repositoriesContributedTo(first: 1) { totalCount }
+        publicRepos: repositories(privacy: PUBLIC) { totalCount }
         repositories(first: 100, ownerAffiliations: OWNER) {
           nodes {
             stargazerCount
@@ -61,10 +62,13 @@ async function getAllStats() {
   const totalPRs = user.pullRequests.totalCount;
   const totalIssues = user.issues.totalCount;
   const totalContributedTo = user.repositoriesContributedTo.totalCount;
+  const publicRepos = user.publicRepos ? user.publicRepos.totalCount : 1;
+  const userEmail = 'darshana@hoslift.com';
   const totalStars = user.repositories.nodes.reduce((acc, repo) => acc + repo.stargazerCount, 0);
 
   const startYear = new Date(user.createdAt).getFullYear();
   const currentYear = new Date().getFullYear();
+  const yearsJoined = Math.max(1, currentYear - startYear);
 
   let allDays = [];
   let totalContributions = 0;
@@ -116,6 +120,17 @@ async function getAllStats() {
 
   const todayStr = new Date().toISOString().slice(0, 10);
   const pastDays = sortedDays.filter(d => d.date <= todayStr);
+
+  // Group past 12 months contributions for activity curve
+  const monthlyData = new Array(12).fill(0);
+  const now = new Date();
+  for (const d of pastDays) {
+    const dayDate = new Date(d.date);
+    const monthsDiff = (now.getFullYear() - dayDate.getFullYear()) * 12 + (now.getMonth() - dayDate.getMonth());
+    if (monthsDiff >= 0 && monthsDiff < 12) {
+      monthlyData[11 - monthsDiff] += d.count;
+    }
+  }
 
   let longestStreak = 0;
   let longestStart = '';
@@ -172,6 +187,10 @@ async function getAllStats() {
 
   return {
     displayName: user.name || USERNAME,
+    username: USERNAME,
+    userEmail,
+    publicRepos,
+    yearsJoined,
     totalCommits,
     totalPRs,
     totalIssues,
@@ -183,10 +202,11 @@ async function getAllStats() {
     currRange,
     longestStreak,
     longestRange,
+    monthlyData,
   };
 }
 
-// Option 1: Streak Stats SVG (Green Accent)
+// 1. Streak Stats SVG (Green Accent)
 function generateStreakSVG(stats) {
   const { totalContributions, totalRange, currentStreak, currRange, longestStreak, longestRange } = stats;
 
@@ -237,7 +257,7 @@ function generateStreakSVG(stats) {
 </svg>`;
 }
 
-// Option 2: Stats Card SVG (Rank Circle & Icons)
+// 2. Stats Card SVG (Rank Circle & Icons)
 function generateStatsSVG(stats) {
   const { displayName, totalCommits, totalPRs, totalIssues, totalStars, totalContributedTo } = stats;
 
@@ -297,6 +317,107 @@ function generateStatsSVG(stats) {
 </svg>`;
 }
 
+// 3. Profile Details SVG (User Info & Contribution Curve)
+function generateProfileDetailsSVG(stats) {
+  const { displayName, username, userEmail, publicRepos, yearsJoined, totalContributions, monthlyData } = stats;
+
+  const chartX = 245;
+  const chartY = 38;
+  const chartW = 225;
+  const chartH = 105;
+
+  const maxVal = Math.max(...monthlyData, 10);
+  const pts = monthlyData.map((val, idx) => {
+    const x = chartX + (idx / (monthlyData.length - 1)) * chartW;
+    const y = chartY + chartH - (val / maxVal) * chartH;
+    return { x, y };
+  });
+
+  let pathD = `M ${pts[0].x} ${pts[0].y}`;
+  for (let i = 1; i < pts.length; i++) {
+    const prev = pts[i - 1];
+    const curr = pts[i];
+    const mx = (prev.x + curr.x) / 2;
+    pathD += ` C ${mx} ${prev.y}, ${mx} ${curr.y}, ${curr.x} ${curr.y}`;
+  }
+  const areaD = `${pathD} L ${chartX + chartW} ${chartY + chartH} L ${chartX} ${chartY + chartH} Z`;
+
+  const contribText = totalContributions >= 1000 
+    ? `${(totalContributions / 1000).toFixed(2)}k Contributions on GitHub`
+    : `${totalContributions} Contributions on GitHub`;
+
+  return `<svg width="495" height="195" viewBox="0 0 495 195" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .bg { fill: #0d1117; stroke: #30363d; }
+    .header-name { font: 600 16px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #40c463; }
+    .sub-item { font: 400 11.5px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #8b949e; }
+    .icon { fill: #8b949e; }
+    .chart-label { font: 400 10px 'Segoe UI', -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif; fill: #8b949e; }
+    .chart-line { stroke: #40c463; stroke-width: 2; fill: none; }
+    .chart-area { fill: #40c463; fill-opacity: 0.25; }
+    .axis { stroke: #30363d; stroke-width: 1; }
+
+    @media (prefers-color-scheme: light) {
+      .bg { fill: #ffffff; stroke: #e1e4e8; }
+      .header-name { fill: #238636; }
+      .sub-item { fill: #586069; }
+      .icon { fill: #586069; }
+      .chart-label { fill: #586069; }
+      .chart-line { stroke: #238636; }
+      .chart-area { fill: #238636; fill-opacity: 0.2; }
+      .axis { stroke: #e1e4e8; }
+    }
+  </style>
+
+  <rect class="bg" x="0.5" y="0.5" width="494" height="194" rx="4.5" stroke-width="1"/>
+
+  <!-- Left: User Details -->
+  <text x="25" y="36" class="header-name">${username} (${displayName.slice(0, 15)}...)</text>
+
+  <g transform="translate(25, 54)">
+    <svg class="icon" viewBox="0 0 16 16" width="14" height="14">
+      <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+    </svg>
+    <text x="22" y="11" class="sub-item">${contribText}</text>
+  </g>
+
+  <g transform="translate(25, 82)">
+    <svg class="icon" viewBox="0 0 16 16" width="14" height="14">
+      <path fill-rule="evenodd" d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5v-9Zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 0 1 1-1h8ZM5 12.25v3.25a.25.25 0 0 0 .4.2l1.45-1.087a.25.25 0 0 1 .3 0L8.6 15.7a.25.25 0 0 0 .4-.2v-3.25a.25.25 0 0 0-.25-.25h-3.5a.25.25 0 0 0-.25.25Z"/>
+    </svg>
+    <text x="22" y="11" class="sub-item">${publicRepos} Public Repos</text>
+  </g>
+
+  <g transform="translate(25, 110)">
+    <svg class="icon" viewBox="0 0 16 16" width="14" height="14">
+      <path fill-rule="evenodd" d="M1.5 8a6.5 6.5 0 1 1 13 0 6.5 6.5 0 0 1-13 0ZM8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0Zm.5 4.75a.75.75 0 0 0-1.5 0v3.5a.75.75 0 0 0 .471.696l2.5 1a.75.75 0 0 0 .557-1.392L8.5 7.742V4.75Z"/>
+    </svg>
+    <text x="22" y="11" class="sub-item">Joined GitHub ${yearsJoined} years ago</text>
+  </g>
+
+  <g transform="translate(25, 138)">
+    <svg class="icon" viewBox="0 0 16 16" width="14" height="14">
+      <path fill-rule="evenodd" d="M1.75 2A1.75 1.75 0 0 0 0 3.75v.736a.75.75 0 0 0 0 .027v7.737C0 13.216.784 14 1.75 14h12.5A1.75 1.75 0 0 0 16 12.25v-8.5A1.75 1.75 0 0 0 14.25 2H1.75ZM14.5 4.07v-.32a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25v.32L8 7.88l6.5-3.81Zm-13 1.74v6.441c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V5.809L8.38 9.397a.75.75 0 0 1-.76 0L1.5 5.809Z"/>
+    </svg>
+    <text x="22" y="11" class="sub-item">${userEmail}</text>
+  </g>
+
+  <!-- Right: Activity Graph -->
+  <text x="${chartX + chartW}" y="25" text-anchor="end" class="chart-label">contributions in the last year</text>
+
+  <path class="chart-area" d="${areaD}"/>
+  <path class="chart-line" d="${pathD}"/>
+
+  <line class="axis" x1="${chartX}" y1="${chartY + chartH}" x2="${chartX + chartW}" y2="${chartY + chartH}"/>
+
+  <text x="${chartX}" y="${chartY + chartH + 18}" class="chart-label">Oct</text>
+  <text x="${chartX + chartW * 0.25}" y="${chartY + chartH + 18}" text-anchor="middle" class="chart-label">Jan</text>
+  <text x="${chartX + chartW * 0.5}" y="${chartY + chartH + 18}" text-anchor="middle" class="chart-label">Apr</text>
+  <text x="${chartX + chartW * 0.75}" y="${chartY + chartH + 18}" text-anchor="middle" class="chart-label">Jul</text>
+  <text x="${chartX + chartW}" y="${chartY + chartH + 18}" text-anchor="end" class="chart-label">Oct</text>
+</svg>`;
+}
+
 async function main() {
   console.log('Fetching verified stats from GitHub API...');
   const stats = await getAllStats();
@@ -307,6 +428,9 @@ async function main() {
 
   fs.writeFileSync('github-stats.svg', generateStatsSVG(stats));
   console.log('Successfully generated github-stats.svg!');
+
+  fs.writeFileSync('profile-details.svg', generateProfileDetailsSVG(stats));
+  console.log('Successfully generated profile-details.svg!');
 }
 
 main().catch(err => {
