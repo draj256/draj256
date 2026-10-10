@@ -27,7 +27,7 @@
         </svg>
       </g>
       <text x="30" y="12" class="activity-text">Pushed commits to <tspan font-weight="700">draj256/draj256</tspan></text>
-      <text x="445" y="12" text-anchor="end" class="activity-time">2h ago</text>
+      <text x="445" y="12" text-anchor="end" class="activity-time">8h ago</text>
     </g>
     <g transform="translate(25, 88)">
       <circle cx="10" cy="8" r="10" fill="#40c463" fill-opacity="0.15"/>
@@ -36,8 +36,8 @@
           <path d="M11.93 8.5a4.002 4.002 0 0 1-7.86 0H.75a.75.75 0 0 1 0-1.5h3.32a4.002 4.002 0 0 1 7.86 0h3.32a.75.75 0 0 1 0 1.5h-3.32Zm-1.43-.75a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"/>
         </svg>
       </g>
-      <text x="30" y="12" class="activity-text">Pushed commits to <tspan font-weight="700">draj256/draj256</tspan></text>
-      <text x="445" y="12" text-anchor="end" class="activity-time">2h ago</text>
+      <text x="30" y="12" class="activity-text">Pushed commits to <tspan font-weight="700">hoslift/ranu.js</tspan></text>
+      <text x="445" y="12" text-anchor="end" class="activity-time">1d ago</text>
     </g>
     <g transform="translate(25, 120)">
       <circle cx="10" cy="8" r="10" fill="#40c463" fill-opacity="0.15"/>
@@ -47,16 +47,16 @@
         </svg>
       </g>
       <text x="30" y="12" class="activity-text">Pushed commits to <tspan font-weight="700">draj256/draj256</tspan></text>
-      <text x="445" y="12" text-anchor="end" class="activity-time">2h ago</text>
+      <text x="445" y="12" text-anchor="end" class="activity-time">11h ago</text>
     </g>
     <g transform="translate(25, 152)">
-      <circle cx="10" cy="8" r="10" fill="#58a6ff" fill-opacity="0.15"/>
+      <circle cx="10" cy="8" r="10" fill="#40c463" fill-opacity="0.15"/>
       <g transform="translate(4, 2)">
-        <svg viewBox="0 0 16 16" width="12" height="12" fill="#58a6ff">
-          <path d="M11.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm-2.25.75a2.25 2.25 0 1 1 3 2.122V6A2.5 2.5 0 0 1 10 8.5H6a1 1 0 0 0-1 1v1.128a2.251 2.251 0 1 1-1.5 0V5.372a2.25 2.25 0 1 1 1.5 0v1.836A2.493 2.493 0 0 1 6 7h4a1 1 0 0 0 1-1v-.628A2.25 2.25 0 0 1 9.5 3.25Z"/>
+        <svg viewBox="0 0 16 16" width="12" height="12" fill="#40c463">
+          <path d="M11.93 8.5a4.002 4.002 0 0 1-7.86 0H.75a.75.75 0 0 1 0-1.5h3.32a4.002 4.002 0 0 1 7.86 0h3.32a.75.75 0 0 1 0 1.5h-3.32Zm-1.43-.75a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"/>
         </svg>
       </g>
-      <text x="30" y="12" class="activity-text">Created branch in <tspan font-weight="700">hoslift/ranu.js</tspan></text>
-      <text x="445" y="12" text-anchor="end" class="activity-time">1d ago</text>
+      <text x="30" y="12" class="activity-text">Pushed commits to <tspan font-weight="700">draj256/draj256</tspan></text>
+      <text x="445" y="12" text-anchor="end" class="activity-time">11h ago</text>
     </g>
 </svg>
