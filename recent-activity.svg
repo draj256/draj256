@@ -27,7 +27,7 @@
         </svg>
       </g>
       <text x="30" y="12" class="activity-text">Activity in <tspan font-weight="700">hoslift/ranu.js</tspan></text>
-      <text x="445" y="12" text-anchor="end" class="activity-time">3h ago</text>
+      <text x="445" y="12" text-anchor="end" class="activity-time">1d ago</text>
     </g>
     <g transform="translate(25, 88)">
       <circle cx="10" cy="8" r="10" fill="#58a6ff" fill-opacity="0.15"/>
@@ -37,7 +37,7 @@
         </svg>
       </g>
       <text x="30" y="12" class="activity-text">Created branch in <tspan font-weight="700">hoslift/ranu.js</tspan></text>
-      <text x="445" y="12" text-anchor="end" class="activity-time">2d ago</text>
+      <text x="445" y="12" text-anchor="end" class="activity-time">3d ago</text>
     </g>
     <g transform="translate(25, 120)">
       <circle cx="10" cy="8" r="10" fill="#58a6ff" fill-opacity="0.15"/>
@@ -47,7 +47,7 @@
         </svg>
       </g>
       <text x="30" y="12" class="activity-text">Created branch in <tspan font-weight="700">hoslift/ranu.js</tspan></text>
-      <text x="445" y="12" text-anchor="end" class="activity-time">2d ago</text>
+      <text x="445" y="12" text-anchor="end" class="activity-time">3d ago</text>
     </g>
     <g transform="translate(25, 152)">
       <circle cx="10" cy="8" r="10" fill="#40c463" fill-opacity="0.15"/>
@@ -57,6 +57,6 @@
         </svg>
       </g>
       <text x="30" y="12" class="activity-text">Pushed commits to <tspan font-weight="700">hoslift/hoslift-workflow</tspan></text>
-      <text x="445" y="12" text-anchor="end" class="activity-time">2d ago</text>
+      <text x="445" y="12" text-anchor="end" class="activity-time">3d ago</text>
     </g>
 </svg>
