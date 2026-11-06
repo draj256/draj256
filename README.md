@@ -25,7 +25,7 @@ I'm the founder of **[Hoslift](https://hoslift.com)** and a **Full-Stack Develop
 
 My work spans web development, digital products, cloud infrastructure, and open source. I enjoy turning ideas into practical systems and improving them through thoughtful engineering.
 
-- 🌍 **Based in:** Sri Lanka 🇱🇰
+- 🌍 **Based in:** Sri Lanka 
 - 🏢 **Building:** Digital experiences and software at **[Hoslift](https://hoslift.com)**
 - ⚡ **Open source:** Creator of **[Ranu.js](https://github.com/hoslift/ranu.js)**
 - 📫 **Contact:** **[darshana@hoslift.com](mailto:darshana@hoslift.com)**
